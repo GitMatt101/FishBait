@@ -15,7 +15,7 @@
 }
 
 body > .container-fluid {
-    background: linear-gradient(149deg, rgba(14,0,255,1) 0%, rgba(0,254,255,1) 50%, rgba(0,0,0,1) 100%);
+    background: linear-gradient(149deg, rgba(14,0,255,1) 0%, rgba(0,254,255,1) 50%, rgba(12, 109, 86, 0.8) 100%);
 }
 
 header .container-fluid h1 {
