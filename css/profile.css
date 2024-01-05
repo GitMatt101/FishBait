@@ -73,6 +73,7 @@ header nav ul li i {
     width: 50%;
     text-align: center;
     margin-top: 1%;
+    border-bottom: 3px solid black;
 }
 
 .pfp-username img {
@@ -84,4 +85,5 @@ header nav ul li i {
 
 main {
     width: 50%;
+    margin-top: 1%;
 }
