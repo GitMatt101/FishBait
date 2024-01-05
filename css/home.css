@@ -1,0 +1,56 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 18%;
+    border-bottom: 1px solid rgba(219, 219, 219, 1);
+}
+
+header .container-fluid input {
+    height: 30px;
+    border: none;
+    outline: none;
+    padding-left: 10px;
+    font-size: 15px;
+    color: #8e8e8e;
+    background-color: rgba(248, 249, 250, 1);
+}
+
+header .navbar-brand {
+    font-size: 250%;
+}
+
+header .container-fluid {
+    width: 250px;
+    padding: 3px 16px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+}
+
+header nav ul li {
+    margin-right: 20px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+i {
+    font-size: 150%;
+}
+
+header nav ul li i {
+    color: black;
+}
