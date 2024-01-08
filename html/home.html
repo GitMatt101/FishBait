@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" data-bs-theme="light">
 <head>
     <script src="../javascript/darkmode.js"></script>
-    <script src="../javascript/like.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
@@ -12,86 +11,74 @@
     <link href="../css/home.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-    <div class="container-fluid">
-        <header>
-            <!-- <div class="container mt-5 mb-5">
-                <div class="row justify-content-center">
-                    <input type="checkbox" id="darkmode-toogle"/>
-                    <label for="darkmode-toogle"></label>
-                    <h2 class="navbar-brand">FishBait</h2>
-                </div>
-            </div>   Versione di bootstrap migliore, correggere in futuro --> 
-            <div class="container-fluid">
-                <input type="checkbox" id="darkmode-toogle"/>
-                <label for="darkmode-toogle"></label>
-                <h2 class="navbar-brand">FishBait</h2>
-            </div>
-            <div class="container-fluid">
-                <i class="bi bi-search"></i>
-                <input type="search" placeholder="Ricerca">
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#"><i class="bi bi-house-door-fill"></i></a></li>
-                    <li><a href="#"><i class="bi bi-plus-square"></i></a></li>
-                    <li><a href="#"><i class="bi bi-suit-heart"></i></a></li>
-                    <li><a href="#"><i class="bi bi-person-circle"></i></a></li>
-                </ul>
-            </nav>
-        </header>
+    <nav class="navbar navbar-expand-sm justify-content-center">
+        <div class="container-fluid border-bottom pt-2">
+          <input class="form-check-input p-2" id="check" type="checkbox" role="switch" unchecked onclick="myFunction()">
+          <label for="check" class="me-2">Dark mode</label>
+          <a class="navbar-brand">
+            <b><span style="font-size: 200%; margin-left: 20%;">FishBait</span></b>
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                  <a href="#"><i class="bi bi-house-door-fill"></i></a>
+                </li>
+                <li class="nav-item">
+                  <a href="#"><i class="bi bi-plus-square"></i></a>
+                </li>
+                <li class="nav-item">
+                  <a href="#"><i class="bi bi-suit-heart"></i></a>
+                </li>
+                <li>
+                  <a href="#"><i class="bi bi-person-circle"></i></a>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <input class="form-control me-2" type="text" placeholder="Ricerca">
+                <button class="btn btn-dark" type="button">Ricerca</button>
+            </form>
+          </div>
+        </div>
+      </nav>
 
-        <section>
-            <div class="container">
-                <div class="posts">
-                    <div class="post-title">
-                        <div class="post-left">
-                            <div class="image">
-                                <img src="../resources/img/postexample.png" alt="ff" height="32" width="32">
-                            </div>
-                            <div class="details">
-                                <p class="name">Johnsen_Benjamin</p>
-                                <p class="location">Haugesund, Norway</p>
-                            </div>
-                        </div>
-                        <div class="post-right">
-                            <i class="bi bi-three-dots"></i>
-                        </div>
-                    </div>
-
-                    <div class="post-content">
-                        <img src="../resources/img/postexample.png" alt="ff">
-                    </div>
-
-                    <div class="post-footer">
-                        <div class="bottoni">
-                            <button class="btn"><i class="bi bi-suit-heart"></i></button>
-                            <button class="btn"><i class="bi bi-chat"></i></button>
-                            <button class="btn"><i class="bi bi-send"></i></button>
-                        </div>
-                        <div class="save">
-                            <button class="btn"><i class="bi bi-bookmark"></i></button>
-                        </div>
-                    </div>
-
-                    <div class="post-footer-content">
-                        <p class="likes">Piace a 100 persone</p>
-                        <p class="name">Johnsen_Benjamin <span>What a MASSIVE strange fish 0_o</span> </p>
-                        <p class="comments">Mostra tutti i commenti</p>
-                        <p class="time">23 ore fa</p>
-                    </div>
-
-                    <div class="add-comment">
-                        <div class="left-side">
-                            <i class="bi bi-emoji-smile"></i>
-                            <input type="text" placeholder="Aggiungi un commento...">
-                        </div>
-                        <div class="right-side">
-                            <p>Post</p>
-                        </div>
+      <section>
+          <div class="container mt-3">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex align-items-center">
+                    <img src="../resources/img/postexample.png" class="rounded-circle me-3" alt="ff" width="40" height="40">
+                    <div>
+                        <b>Johnsen_Benjamin</b>
+                        <p class="mb-0">Haugesund, Norway</p>
                     </div>
                 </div>
             </div>
-        </section>
-    </div>
+            <img src="../resources/img/postexample.png" class="rounded" alt="" width="50%" height="30%">
+
+            <div class="d-flex justify-content-between mb-2">
+                <div>
+                    <a href="#"><i class="bi bi-suit-heart fs-4"></i></a>
+                    <a href="#"><i class="bi bi-chat fs-4"></i></a>
+                    <a href="#"><i class="bi bi-bookmark fs-4"></i></a>
+                </div>
+            </div>
+            
+    
+            <div class="mb-2">
+                <p class="mb-1"><strong>Piace a 100 persone</strong></p>
+                <p><strong>Johnsen_Benjamin</strong> <span>What a MASSIVE strange fish 0_o</span></p>
+                <p class="mb-1">Mostra tutti i commenti</p>
+                <p class="text-muted small">23 ore fa</p>
+            </div>
+    
+            <div class="d-flex align-items-center">
+                <i class="bi bi-emoji-smile me-2"></i>
+                <input type="text" class="form-control w-50" placeholder="Aggiungi un commento...">
+                <p class="mb-0 ms-2">Post</p>
+            </div>
+        </div>
+      </section>
 </body>
 </html>
