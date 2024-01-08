@@ -2,6 +2,7 @@
 <html lang="it">
 <head>
     <script src="../javascript/darkmode.js"></script>
+    <script src="../javascript/like.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
@@ -13,6 +14,13 @@
 <body>
     <div class="container-fluid">
         <header>
+            <!-- <div class="container mt-5 mb-5">
+                <div class="row justify-content-center">
+                    <input type="checkbox" id="darkmode-toogle"/>
+                    <label for="darkmode-toogle"></label>
+                    <h2 class="navbar-brand">FishBait</h2>
+                </div>
+            </div>   Versione di bootstrap migliore, correggere in futuro --> 
             <div class="container-fluid">
                 <input type="checkbox" id="darkmode-toogle"/>
                 <label for="darkmode-toogle"></label>
@@ -56,12 +64,12 @@
 
                     <div class="post-footer">
                         <div class="bottoni">
-                            <i class="bi bi-suit-heart"></i>
-                            <i class="bi bi-chat"></i>
-                            <i class="bi bi-send"></i>
+                            <button class="btn"><i class="bi bi-suit-heart"></i></button>
+                            <button class="btn"><i class="bi bi-chat"></i></button>
+                            <button class="btn"><i class="bi bi-send"></i></button>
                         </div>
                         <div class="save">
-                            <i class="bi bi-bookmark"></i>
+                            <button class="btn"><i class="bi bi-bookmark"></i></button>
                         </div>
                     </div>
 
