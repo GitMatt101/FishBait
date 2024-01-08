@@ -1,5 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
-   document.getElementById('darkmode-toogle').addEventListener('change', function() {
-       document.body.classList.toggle('dark-mode', this.checked);
-   });
-});
+function myFunction() {
+    var element = document.body;
+    element.dataset.bsTheme = element.dataset.bsTheme == "dark" ? "light" : "dark";
+}
