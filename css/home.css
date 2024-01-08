@@ -5,11 +5,44 @@
     background-color: rgba(248, 249, 250, 1);
 }
 
+label {
+    width: 50px;
+    height: 20px;
+    display: block;
+    background: #ebebeb;
+    border-radius: 200px;
+    box-shadow: inset opx 5px 15px rgba(0, 0, 0, 0.4), inset 0px -5px 15px rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    margin-right: 20px;
+    float: left;
+    transition: 0.3s;
+}
+
+#darkmode-toogle {
+    width: 0;
+    height: 0;
+    visibility: hidden;
+}
+
+input:checked + label {
+    background: grey;
+}
+
+input:checked + label:after {
+    transform: translateX(-100%);
+    background: linear-gradient(180deg,#777,#3a3a3a);
+}
+
+.dark-mode * {
+    background-color: #242424;
+    color: white;
+  }
+
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 18%;
+    padding: 10px;
     border-bottom: 1px solid rgba(219, 219, 219, 1);
 }
 
@@ -32,6 +65,7 @@ header .container-fluid {
     display: flex;
     align-items: center;
     border-radius: 8px;
+    margin-left: 0px;
 }
 
 header nav ul {
