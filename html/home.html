@@ -11,41 +11,16 @@
     <link href="../css/home.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm justify-content-center">
-        <div class="container-fluid border-bottom pt-2">
-          <input class="form-check-input p-2" id="check" type="checkbox" role="switch" unchecked onclick="myFunction()">
-          <label for="check" class="me-2">Dark mode</label>
-          <a class="navbar-brand">
-            <b><span style="font-size: 200%; margin-left: 20%;">FishBait</span></b>
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse">
-            <ul class="navbar-nav mx-auto">
-                <li class="nav-item">
-                  <a href="#"><i class="bi bi-house-door-fill"></i></a>
-                </li>
-                <li class="nav-item">
-                  <a href="#"><i class="bi bi-plus-square"></i></a>
-                </li>
-                <li class="nav-item">
-                  <a href="#"><i class="bi bi-suit-heart"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="bi bi-person-circle"></i></a>
-                </li>
-            </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="text" placeholder="Ricerca">
-                <button class="btn btn-dark" type="button">Ricerca</button>
-            </form>
-          </div>
-        </div>
-      </nav>
+      <div class="container-fluid border-bottom pt-2 d-flex justify-content-center pb-3">
+          <b><span style="font-size: 200%;">FishBait</span></b>
+      </div>
 
-      <section>
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-6 p-2 d-flex justify-content-center align-items-center">
           <div class="container mt-3">
+
+            <!--Primo post-->
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div class="d-flex align-items-center">
                     <img src="../resources/img/postexample.png" class="rounded-circle me-3" alt="ff" width="40" height="40">
@@ -55,30 +30,176 @@
                     </div>
                 </div>
             </div>
-            <img src="../resources/img/postexample.png" class="rounded" alt="" width="50%" height="30%">
-
+            <img src="../resources/img/postexample.png" class="rounded" alt="" width="75%">
             <div class="d-flex justify-content-between mb-2">
                 <div>
-                    <a href="#"><i class="bi bi-suit-heart fs-4"></i></a>
-                    <a href="#"><i class="bi bi-chat fs-4"></i></a>
-                    <a href="#"><i class="bi bi-bookmark fs-4"></i></a>
+                    <a href="#"><i class="bi bi-suit-heart me-4 fs-4"></i></a>
+                    <a href="#"><i class="bi bi-chat me-4 fs-4"></i></a>
+                    <a href="#"><i class="bi bi-bookmark me-4 fs-4"></i></a>
                 </div>
             </div>
-            
-    
             <div class="mb-2">
                 <p class="mb-1"><strong>Piace a 100 persone</strong></p>
                 <p><strong>Johnsen_Benjamin</strong> <span>What a MASSIVE strange fish 0_o</span></p>
                 <p class="mb-1">Mostra tutti i commenti</p>
                 <p class="text-muted small">23 ore fa</p>
             </div>
-    
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center pb-5">
                 <i class="bi bi-emoji-smile me-2"></i>
                 <input type="text" class="form-control w-50" placeholder="Aggiungi un commento...">
                 <p class="mb-0 ms-2">Post</p>
             </div>
+
+            <!--Secondo post-->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <div class="d-flex align-items-center">
+                  <img src="../resources/img/kesha.jpeg" class="rounded-circle me-3" alt="ff" width="40" height="40">
+                  <div>
+                      <b>T1 Kesha</b>
+                      <p class="mb-0">Italy, Italy</p>
+                  </div>
+              </div>
+            </div>
+            <img src="../resources/img/joel.jpeg" class="rounded" alt="" width="75%">
+            <div class="d-flex justify-content-between mb-2">
+                <div>
+                    <a href="#"><i class="bi bi-suit-heart me-4 fs-4"></i></a>
+                    <a href="#"><i class="bi bi-chat me-4 fs-4"></i></a>
+                    <a href="#"><i class="bi bi-bookmark me-4 fs-4"></i></a>
+                </div>
+            </div>
+            <div class="mb-2">
+                <p class="mb-1"><strong>Piace a 1.837 persone</strong></p>
+                <p><strong>T1 Kesha</strong> <span>WE WINDOOOOOOOWWWWSSS</span></p>
+                <p class="mb-1">Mostra tutti i commenti</p>
+                <p class="text-muted small">4 minuti fa</p>
+            </div>
+            <div class="d-flex align-items-center pb-5">
+                <i class="bi bi-emoji-smile me-2"></i>
+                <input type="text" class="form-control w-50" placeholder="Aggiungi un commento...">
+                <p class="mb-0 ms-2">Post</p>
+            </div>
+          </div>
         </div>
-      </section>
+        
+
+        <div class="col-md-3 p-2">
+          <!--Scrivere qui i suggeriti per te-->
+          <div class="container mt-3">
+            <div class="align-items-center">
+              <div class="d-flex align-items-center">
+                  <img src="../resources/img/postexample.png" class="rounded-circle me-3" alt="ff" width="70" height="70">
+                  <div class="w-100">
+                      <b class="mb-0">Johnsen_Benjamin</b>
+                      <p>Johnsen Benjamin</p>
+                  </div>
+                  <div>
+                    <p class="text-primary">Passa_a</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container mt-3">
+            <div class="align-items-center">
+              <div class="d-flex align-items-center">
+                  <div class="w-100">
+                      <p>Suggeriti per te</p>
+                  </div>
+                  <div>
+                    <p class="text-primary">Mostra_tutti</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container mt-3">
+            <div class="align-items-center">
+              <div class="d-flex align-items-center">
+                  <img src="../resources/img/profile1.png" class="rounded-circle me-3" alt="ff" width="70" height="70">
+                  <div class="w-100">
+                      <b class="mb-0">RiverRangerMarcus</b>
+                      <p>Marcus Fletcher</p>
+                  </div>
+                  <div>
+                    <p class="text-primary">Segui</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container mt-3">
+            <div class="align-items-center">
+              <div class="d-flex align-items-center">
+                  <img src="../resources/img/profile2.png" class="rounded-circle me-3" alt="ff" width="70" height="70">
+                  <div class="w-100">
+                      <b class="mb-0">SeaSageHiro</b>
+                      <p>Hiroshi Takahashir</p>
+                  </div>
+                  <div>
+                    <p class="text-primary">Segui</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container mt-3">
+            <div class="align-items-center">
+              <div class="d-flex align-items-center">
+                  <img src="../resources/img/profile3.png" class="rounded-circle me-3" alt="ff" width="70" height="70">
+                  <div class="w-100">
+                      <b class="mb-0">MasterAnglerZhang</b>
+                      <p>Zhang Wei</p>
+                  </div>
+                  <div>
+                    <p class="text-primary">Segui</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container mt-3">
+            <div class="align-items-center">
+              <div class="d-flex align-items-center">
+                  <img src="../resources/img/profile4.png" class="rounded-circle me-3" alt="ff" width="70" height="70">
+                  <div class="w-100">
+                      <b class="mb-0">LakesideLegendCarlos</b>
+                      <p>Carlos Rivera</p>
+                  </div>
+                  <div>
+                    <p class="text-primary">Segui</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-1"></div>
+      </div>
+
+      <footer>
+        <nav class="navbar navbar-expand-sm justify-content-center">
+          <div class="container-fluid border-top pt-2">
+              <input class="form-check-input p-2" type="checkbox" role="switch" onclick="myFunction()">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mx-auto">
+                  <li class="nav-item me-4">
+                      <a href="#"><i class="bi bi-house-door-fill fs-4"></i></a>
+                  </li>
+                  <li class="nav-item me-4">
+                      <a href="#"><i class="bi bi-plus-square fs-4"></i></a>
+                  </li>
+                  <li class="nav-item me-4">
+                      <a href="#"><i class="bi bi-suit-heart fs-4"></i></a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="#"><i class="bi bi-person-circle fs-4"></i></a>
+                  </li>
+              </ul>
+              <form class="d-flex">
+                  <input class="form-control me-2" type="text" placeholder="Ricerca">
+                  <button class="btn btn-primary" type="button">Ricerca</button>
+              </form>
+            </div>
+          </div>
+        </nav>      
+      </footer>
 </body>
 </html>
