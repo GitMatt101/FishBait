@@ -1,8 +1,8 @@
 function myFunction() {
-    var element = document.body;
+    let element = document.body;
     element.dataset.bsTheme = element.dataset.bsTheme == "dark" ? "light" : "dark";
 
-    var icons = document.querySelectorAll('.theme-icon');
+    let icons = document.querySelectorAll('.theme-icon');
     icons.forEach(function(icon) {
         if (element.dataset.bsTheme == "dark") {
             icon.classList.remove('text-dark');
@@ -12,5 +12,12 @@ function myFunction() {
             icon.classList.add('text-dark');
         }
     });
+
+    let navbar = document.querySelector('.navbar'); 
+    if (element.dataset.bsTheme == "dark") {
+        navbar.style.backgroundColor = "rgb(33, 37, 41)"; 
+    } else {
+        navbar.style.backgroundColor = "white";
+    }
 }
 
