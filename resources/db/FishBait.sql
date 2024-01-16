@@ -1,9 +1,13 @@
 -- CREAZIONE DELLA STRUTTURA DEL DATABASE
 
-CREATE DATABASE IF NOT EXISTS fishbait;
+DROP DATABASE IF EXISTS FishBait;
+CREATE DATABASE FishBait;
 
+DROP USER 'secureUser'@'localhost';
 CREATE USER 'secureUser'@'localhost' IDENTIFIED BY 'SeCuRePaSsWoRd123456?!%';
-GRANT SELECT, INSERT, UPDATE, DELETE ON `fishbait`.* TO 'secureUser'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON `FishBait`.* TO 'secureUser'@'localhost';
+
+USE FishBait;
 
 CREATE TABLE utenti(
     Email VARCHAR(50) NOT NULL PRIMARY KEY,
@@ -12,7 +16,7 @@ CREATE TABLE utenti(
     Username VARCHAR(30) NOT NULL,
     Nome VARCHAR(50),
     Cognome VARCHAR(50),
-    FotoProfilo VARCHAR(255),
+    FotoProfilo LONGBLOB,
     DataNascita DATE,
     Descrizione TEXT
 );
@@ -20,7 +24,7 @@ CREATE TABLE utenti(
 CREATE TABLE post(
     ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     EmailUtente VARCHAR(50) NOT NULL,
-    Foto VARCHAR(255),
+    Foto LONGBLOB,
     DataPubblicazione DATETIME NOT NULL,
     Luogo VARCHAR(30),
     Descrizione VARCHAR(50),
@@ -33,7 +37,7 @@ CREATE TABLE commenti(
     EmailUtente VARCHAR(50) NOT NULL,
     Contenuto VARCHAR(100) NOT NULL,
     DataPubblicazione DATE NOT NULL,
-    FOREIGN KEY (IDPost) REFERENCES post(IDPost),
+    FOREIGN KEY (IDPost) REFERENCES post(ID),
     FOREIGN KEY (EmailUtente) REFERENCES utenti(Email)
 );
 
@@ -56,10 +60,10 @@ CREATE TABLE notifiche(
     FOREIGN KEY (IDPost) REFERENCES post(ID)
 );
 
-CREATE TABLE like(
+CREATE TABLE likes(
     EmailUtente VARCHAR(50) NOT NULL,
     IDPost INT NOT NULL,
-    PRIMARY KEY (EmailUtente, IDPost)
+    PRIMARY KEY (EmailUtente, IDPost),
     FOREIGN KEY (EmailUtente) REFERENCES utenti(Email),
     FOREIGN KEY (IDPost) REFERENCES post (ID)
 );
@@ -70,6 +74,3 @@ CREATE TABLE tentativi_login(
 );
 
 -- INSERIMENTO DI VALORI NEL DATABASE
-
-INSERT INTO utenti(Email, Pwd, Salt, Username, Nome, Cognome, FotoProfilo, Descrizione)
-VALUES ("mario.rossi@gmail.com", )
