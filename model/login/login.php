@@ -37,10 +37,11 @@ if (isset($_POST['remember']))
     $remember = true;
 if (isset($_POST['email'], $_POST['password'])) {
     if(login($_POST['email'], $_POST['password'], $conn, $remember)) {
-        // Login OK
-        // TO DO: Apre la home dell'utente loggato
+        header('Location: ../../view/html/home.html');
+        exit;
     }
 }
+
 $conn->close();
 
 ?>
