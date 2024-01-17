@@ -1,13 +1,13 @@
 -- CREAZIONE DELLA STRUTTURA DEL DATABASE
 
-DROP DATABASE IF EXISTS FishBait;
-CREATE DATABASE FishBait;
+DROP DATABASE IF EXISTS fishbait;
+CREATE DATABASE fishbait;
 
-DROP USER 'secureUser'@'localhost';
+DROP USER IF EXISTS 'secureUser'@'localhost';
 CREATE USER 'secureUser'@'localhost' IDENTIFIED BY 'SeCuRePaSsWoRd123456?!%';
-GRANT SELECT, INSERT, UPDATE, DELETE ON `FishBait`.* TO 'secureUser'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON `fishbait`.* TO 'secureUser'@'localhost';
 
-USE FishBait;
+USE fishbait;
 
 CREATE TABLE utenti(
     Email VARCHAR(50) NOT NULL PRIMARY KEY,
