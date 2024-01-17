@@ -10,7 +10,6 @@ function checkPasswords() {
     const descrizione = document.getElementById('descrizione').value;
 
     if (password1 === password2) {
-        // Passwords match, send data to PHP
         sendDataToPHP(email, password1, username, nome, cognome, pfp, data, descrizione);
     } else {
         alert("Le password non corrispondono. Riprova.");
@@ -28,9 +27,15 @@ function sendDataToPHP(email, password, username, nome, cognome, pfp, data, desc
     formData.append('data', data)
     formData.append('descrizione', descrizione);
 
+    console.log(email);
+    console.log(password);
+    console.log(username);
+    console.log(nome);
+    console.log(cognome);
+
     $.ajax({
         type: 'POST',
-        url: 'model/registration/registration.php', 
+        url: '../../model/registration/registration.php', 
         data: formData,
         contentType: false,
         processData: false,
@@ -44,3 +49,5 @@ function sendDataToPHP(email, password, username, nome, cognome, pfp, data, desc
         }
     });
 }
+
+document.getElementById("conferma").onclick = checkPasswords();
