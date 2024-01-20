@@ -23,10 +23,16 @@ function checkSession($conn)
             $query->execute();
             $query->store_result();
             if ($query->num_rows == 1)
+            {
                 return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
         }
+    } else {
+        return false;
     }
-    return false;
 }
-
 ?>

@@ -13,6 +13,7 @@ function login() {
         contentType: false,
         processData: false
     });
+    sessionStorage.setItem("userEmail", email);
 }
 
 document.getElementById("confermaLogin").onclick = function() {
