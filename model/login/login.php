@@ -52,7 +52,7 @@ if (isset($_POST['email'], $_POST['password'])) {
                     if (!empty($userData['FotoProfilo'])) {
                         $userData['FotoProfilo'] = base64_encode($userData['FotoProfilo']);
                     }
-                    header("Location: ../../view/html/profile.html");
+                    header("Location: ../../view/html/home.html");
                     exit();
                 } else {
                     echo json_encode(array("error" => "User not found."));
