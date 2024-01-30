@@ -16,7 +16,7 @@ function checkPasswords() {
         alert("Le password non corrispondono. Riprova.");
 }
 
-function sendDataToPHP(email, password, username, nome, cognome, pfp, data, descrizione) {
+function sendDataToPHP(email, password, username, nome, cognome, pfp, data, descrizione, remember) {
     let formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
@@ -24,16 +24,28 @@ function sendDataToPHP(email, password, username, nome, cognome, pfp, data, desc
     formData.append('nome', nome);
     formData.append('cognome', cognome);
     formData.append('pfp', pfp);
-    formData.append('data', data)
+    formData.append('data', data);
     formData.append('descrizione', descrizione);
-    formData.append('remember', remember)
+    formData.append('remember', remember);
 
     $.ajax({
         type: 'POST',
         url: '../../model/registration/registration.php', 
         data: formData,
         contentType: false,
-        processData: false
+        processData: false,
+        dataType: "json",
+        success: function(response) {
+            if (response.success) {
+                sessionStorage.setItem("userEmail", response.email);
+                window.location.href = "../../view/html/home.html";
+            } else {
+                console.log(response.error);
+            }
+        },
+        error: function(error) {
+            console.log(error);
+        }
     });
 }
 

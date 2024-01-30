@@ -1,35 +1,31 @@
 <?php
 
+include '../login/loginUtilities.php';
 require_once('../connection/dbConnection.php');
-include '../login/login.php';
 
 $pwd = $_POST['password'];
 $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
-$hashedPassword = hash('sha512', $pwd . $random_salt);
+$pwd = hash('sha512', $pwd . $random_salt);
 
-$sql = "INSERT INTO utenti(Email, Pwd, Salt, Username, Nome, Cognome, FotoProfilo, DataNascita, Descrizione) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$query = "INSERT INTO utenti(Email, Pwd, Salt, Username, Nome, Cognome, FotoProfilo, DataNascita, Descrizione) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-
-if ($conn && $stmt = $conn->prepare($sql)) {
+session_start();
+if ($stmt = $conn->prepare($query)) {
     $pfp = NULL;
     $stmt->bind_param('ssssssbss', $_POST['email'], $pwd, $random_salt, $_POST['username'], $_POST['nome'], $_POST['cognome'], $pfp, $_POST['data'], $_POST['descrizione']);
 
-    if ($_FILES && $_FILES['pfp']['error'] == 0) {
+    if ($_FILES && $_FILES['pfp']['error'] == 0)
         $stmt->send_long_data(6, file_get_contents($_FILES['pfp']['tmp_name']));
-    }
 
-    $remember = isset($_POST['remember']);
+    $remember = false;
+    if (isset($_POST['remember']))
+        $remember = true;
 
     if ($stmt->execute()) {
-        login($_POST['email'], $hashedPassword, $conn, $remember);
+        $response = array("success" => true, "email" => $_POST['email']);
+        $_SESSION['userEmail'] = $_POST['email'];
     } else {
-        $response = array(
-            "success" => false,
-            "error" => $stmt->error
-        );
+        $response = array("success" => false, "error" => $stmt->error);
     }
 } else {
     $response = array(
@@ -38,13 +34,7 @@ if ($conn && $stmt = $conn->prepare($sql)) {
     );
 }
 
-if (!isset($response)) {
-    $response = array(
-        "success" => true,
-        "username" => $_POST['username']
-    );
-}
-
+$conn->close();
 echo json_encode($response);
 
 ?>

@@ -29,7 +29,7 @@
                         <h3 class="font-weight-bold">Registrazione</h3>
                     </div>
                     <div class="panel-body p-3">
-                        <form action="../../model/registration/registration.php" class="login-validation" enctype="multipart/form-data" method="POST" autocomplete="off">
+                        <form class="login-validation" enctype="multipart/form-data" autocomplete="off">
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class="far fa-envelope"></i></span>
                                 <input id="email" name="email" type="email" class="form-control" placeholder="E-Mail" required>
@@ -57,7 +57,7 @@
                                 <input id="cognome" name="cognome" type="text" class="form-control" placeholder="Cognome">
                             </div>
                             <div class="input-group mb-3">
-                                <label class="ms-1 mt-1 text-muted col-3" for="fotoProfilo">Foto Profilo</label>
+                                <label class="ms-1 mt-1 text-muted col-3" for="pfp">Foto Profilo</label>
                                 <input  id="pfp" name="pfp" type="file" class="form-control" accept="image/png, image/jpeg">
                             </div>
                             <div class="input-group mb-3">
@@ -76,7 +76,7 @@
                                     <span>Hai già un account ?</span>
                                     <a href="login.html"><p>Accedi qui</p></a>
                                 </div>
-                                <button id="conferma" type="submit" class="btn btn-primary">Conferma</button>
+                                <button id="conferma" type="button" class="btn btn-primary">Conferma</button>
                             </div>
                         </form>
                     </div>
