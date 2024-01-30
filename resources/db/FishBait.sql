@@ -44,7 +44,9 @@ CREATE TABLE commenti(
 CREATE TABLE follow(
     EmailUtente VARCHAR(50) NOT NULL,
     EmailUtenteSeguito VARCHAR(50) NOT NULL,
-    PRIMARY KEY (EmailUtente, EmailUtenteSeguito)
+    PRIMARY KEY (EmailUtente, EmailUtenteSeguito),
+    FOREIGN KEY (EmailUtente) REFERENCES utenti(Email),
+    FOREIGN KEY (EmailUtenteSeguito) REFERENCES utenti(Email)
 );
 
 CREATE TABLE notifiche(
