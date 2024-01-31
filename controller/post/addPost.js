@@ -3,13 +3,11 @@ document.getElementById("conferma").onclick = function() {
 }
 
 function addPost() {
-    const titolo = document.getElementById('titolo').value;
     const descrizione = document.getElementById('descrizione').value;
     const luogo = document.getElementById('luogo').value;
     const immagine = document.getElementById('immagine').files[0];
 
     let formData = new FormData();
-    formData.append('titolo', titolo);
     formData.append('descrizione', descrizione);
     formData.append('luogo', luogo);
     formData.append('immagine', immagine);
