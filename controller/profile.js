@@ -1,4 +1,5 @@
 window.addEventListener("load", function () {
+    const user = sessionStorage.getItem("userEmail");
 
     // Dati dell'utente
     $.ajax({
@@ -27,6 +28,92 @@ window.addEventListener("load", function () {
         error: function (error) {
             console.error('Ajax error: ', error);
         }
+    });
+
+    // Seguiti e followers
+    const btnSeguiti = document.getElementById("n-seguiti");
+    const btnFollowers = document.getElementById("n-followers");
+
+    btnSeguiti.addEventListener("click", function () {
+        $.ajax({
+            url: '../../model/getSeguiti.php',
+            type: 'GET',
+            data: {
+                seguiti: user,
+            },
+            dataType: 'json',
+            success: function (response) {
+                if (response.success) {
+                    const jsonData = response.utenti;
+                    console.log(jsonData.length);
+                    const listBox = document.getElementById("listSeguiti");
+                    listBox.innerHTML = "";
+                    for (let i = 0; i < jsonData.length; i++) {
+                        let pfp = document.createElement("img");
+                        pfp.className = "rounded-circle me-3";
+                        pfp.setAttribute(
+                            "src",
+                            "data:image/jpeg;base64," +  jsonData[i].FotoProfilo
+                        );
+                        pfp.setAttribute("width", 60);
+                        pfp.setAttribute("height", 60);
+                        let username = document.createElement("p");
+                        let container = document.createElement("div");
+                        container.className = "d-flex mb-3 align-items-center align-items-center";
+                        username.innerHTML = jsonData[i].Username;
+                        container.appendChild(pfp);
+                        container.appendChild(username);
+                        listBox.appendChild(container);
+                      }
+                } else {
+                    console.log("Errore: ", response.error);
+                }
+            },
+            error: function (error) {
+                console.error('Ajax error: ', error);
+            }
+        });
+    });
+
+    btnFollowers.addEventListener("click", function () {
+        $.ajax({
+            url: '../../model/getFollowers.php',
+            type: 'GET',
+            data: {
+                followers: user,
+            },
+            dataType: 'json',
+            success: function (response) {
+                if (response.success) {
+                    const jsonData = response.followers;
+                    console.log(jsonData.length);
+                    const listBox = document.getElementById("listFollowers");
+                    listBox.innerHTML = "";
+                    for (let i = 0; i < jsonData.length; i++) {
+                        let pfp = document.createElement("img");
+                        pfp.className = "rounded-circle me-3";
+                        pfp.setAttribute(
+                            "src",
+                            "data:image/jpeg;base64," +  jsonData[i].FotoProfilo
+                        );
+                        pfp.setAttribute("width", 60);
+                        pfp.setAttribute("height", 60);
+                        let username = document.createElement("p");
+                        let container = document.createElement("div");
+                        container.className = "d-flex mb-3 align-items-center align-items-center";
+                        username.innerHTML = jsonData[i].Username;
+                        container.appendChild(pfp);
+                        container.appendChild(username);
+                        listBox.appendChild(container);
+                      }
+                } else {
+                    console.log("Errore: ", response.error);
+                }
+            },
+            error: function (error) {
+                console.error('Ajax error: ', error);
+            }
+        });
     });
 
     // Post dell'utente
