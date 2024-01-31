@@ -1,5 +1,4 @@
 window.addEventListener("load", function () {
-
     // Post della home
     $.ajax({
         url: '../../model/post/homePosts.php',
@@ -11,7 +10,7 @@ window.addEventListener("load", function () {
                 let home = document.getElementById("home");
                 for (let i = 0; i < jsonData.length; i++) {
                     let profile = createProfile(jsonData[i].EmailUtente, jsonData[i].Username, jsonData[i].Luogo, jsonData[i].FotoProfilo);
-                    let post = createPost(jsonData[i].Foto, jsonData[i].Username, jsonData[i].Descrizione);
+                    let post = createPost(jsonData[i].ID, jsonData[i].Foto, jsonData[i].Username, jsonData[i].Descrizione);
                     let container = document.createElement("div");
                     container.appendChild(profile);
                     container.appendChild(post);
@@ -66,7 +65,7 @@ function createProfile(email, username, location, image) {
     return profile;
 }
 
-function createPost(image, username, caption) {
+function createPost(id, image, username, caption) {
     let post = document.createElement("div");
 
     let img = document.createElement("img");
@@ -81,18 +80,155 @@ function createPost(image, username, caption) {
     let captionSpace = document.createElement("span");
     captionSpace.innerHTML = caption;
 
+    let likeButton = document.createElement("button");
+    $.ajax({
+        url: '../../model/post/checkLike.php',
+        type: 'GET',
+        dataType: 'json',
+        data: {
+            'postID': id
+        },
+        success: function (response) {
+            if (response.success) {
+                likeButton.className = "bi fs-4 bi-heart-fill border-0 bg-transparent";
+            } else {
+                likeButton.className = "bi fs-4 bi-heart border-0 bg-transparent";
+            }
+        },
+        error: function (error) {
+            console.error('Ajax error: ', error);
+            likeButton.className = "bi fs-4 bi-heart border-0 bg-transparent";
+        }
+    });
+    likeButton.setAttribute("type", "button");
+    likeButton.addEventListener("click", function () {
+        if (likeButton.className === "bi fs-4 bi-heart border-0 bg-transparent") {
+            $.ajax({
+                url: '../../model/post/addLike.php',
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                    'postID': id
+                },
+                success: function (response) {
+                    if (response.success) {
+                        likeButton.className = "bi fs-4 bi-heart-fill border-0 bg-transparent";
+                    } else {
+                        console.log("Errore: ", response.error);
+                    }
+                },
+                error: function (error) {
+                    console.error('Ajax error: ', error);
+                }
+            });
+        } else {
+            $.ajax({
+                url: '../../model/post/removeLike.php',
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                    'postID': id
+                },
+                success: function (response) {
+                    if (response.success) {
+                        likeButton.className = "bi fs-4 bi-heart border-0 bg-transparent";
+                    } else {
+                        console.log("Errore: ", response.error);
+                    }
+                },
+                error: function (error) {
+                    console.error('Ajax error: ', error);
+                }
+            });
+        }
+    });
+
+    let bookmarkButton = document.createElement("button");
+    $.ajax({
+        url: '../../model/post/checkBookmark.php',
+        type: 'GET',
+        dataType: 'json',
+        data: {
+            'postID': id
+        },
+        success: function (response) {
+            if (response.success) {
+                bookmarkButton.className = "bi fs-4 bi-bookmark-fill border-0 bg-transparent";
+            } else {
+                bookmarkButton.className = "bi fs-4 bi-bookmark border-0 bg-transparent";
+            }
+            console.log(response.success);
+        },
+        error: function (error) {
+            console.error('Ajax error: ', error);
+            bookmarkButton.className = "bi fs-4 bi-bookmark border-0 bg-transparent";
+        }
+    });
+    bookmarkButton.setAttribute("type", "button");
+    bookmarkButton.addEventListener("click", function () {
+        if (bookmarkButton.className === "bi fs-4 bi-bookmark border-0 bg-transparent") {
+            $.ajax({
+                url: '../../model/post/addBookmark.php',
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                    'postID': id
+                },
+                success: function (response) {
+                    if (response.success) {
+                        bookmarkButton.className = "bi fs-4 bi-bookmark-fill border-0 bg-transparent";
+                    } else {
+                        console.log("Errore: ", response.error);
+                    }
+                },
+                error: function (error) {
+                    console.error('Ajax error: ', error);
+                }
+            });
+        } else {
+            $.ajax({
+                url: '../../model/post/removeBookmark.php',
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                    'postID': id
+                },
+                success: function (response) {
+                    if (response.success) {
+                        bookmarkButton.className = "bi fs-4 bi-bookmark border-0 bg-transparent";
+                    } else {
+                        console.log("Errore: ", response.error);
+                    }
+                },
+                error: function (error) {
+                    console.error('Ajax error: ', error);
+                }
+            });
+        }
+    });
+
+    let buttonsContainer = document.createElement("div");
+    buttonsContainer.className = "col-3 d-flex justify-content-end";
+    buttonsContainer.appendChild(likeButton);
+    buttonsContainer.appendChild(bookmarkButton);
+
     let captionContainer = document.createElement("p");
-    captionContainer.className = "mb-2";
+    captionContainer.className = "col-9 mb-2";
     captionContainer.appendChild(usernameSpace);
     captionContainer.appendChild(captionSpace);
+
+    let tmp = document.createElement("div");
+    tmp.className = "row";
+    tmp.appendChild(captionContainer);
+    tmp.appendChild(buttonsContainer);
 
     let showComment = document.createElement("a");
     showComment.className = "comment";
     showComment.innerHTML = "Mostra tutti i commenti...";
 
     post.appendChild(img);
-    post.appendChild(captionContainer);
+    post.appendChild(tmp);
     post.appendChild(showComment);
-    
+
     return post;
 }

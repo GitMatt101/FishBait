@@ -75,4 +75,12 @@ CREATE TABLE tentativi_login(
     DataOra VARCHAR(30) NOT NULL
 );
 
+CREATE TABLE bookmarks(
+    EmailUtente VARCHAR(50) NOT NULL,
+    IDPost INT NOT NULL,
+    PRIMARY KEY (EmailUtente, IDPost),
+    FOREIGN KEY (EmailUtente) REFERENCES utenti(Email),
+    FOREIGN KEY (IDPost) REFERENCES post (ID)
+);
+
 -- INSERIMENTO DI VALORI NEL DATABASE

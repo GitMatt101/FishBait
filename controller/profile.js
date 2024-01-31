@@ -127,11 +127,11 @@ window.addEventListener("load", function () {
                 let postSpace = document.getElementById("post-space");
                 for (let i = 0; i < jsonData.length; i++) {
                     let element = document.createElement("div");
-                    element.className = "col-4 mb-2";
+                    element.className = "col-4 mb-2 d-flex flex-wrap align-items-center";
                     element.setAttribute("id", jsonData[i].ID);
 
                     let image = document.createElement("img");
-                    image.className = "img-fluid w-100 h-100";
+                    image.className = "img-fluid";
                     image.setAttribute(
                       "src",
                       "data:image/jpeg;base64," + jsonData[i].Foto
