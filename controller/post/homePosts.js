@@ -157,7 +157,6 @@ function createPost(id, image, username, caption) {
             } else {
                 bookmarkButton.className = "bi fs-4 bi-bookmark border-0 bg-transparent";
             }
-            console.log(response.success);
         },
         error: function (error) {
             console.error('Ajax error: ', error);

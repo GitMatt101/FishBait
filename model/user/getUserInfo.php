@@ -19,7 +19,7 @@ $infoQuery = "SELECT * FROM utenti WHERE Email = ? LIMIT 1";
 
 session_start();
 if ($stmt = $conn->prepare($infoQuery)) {
-    $stmt->bind_param("s", $_SESSION['userEmail']);
+    $stmt->bind_param("s", $_GET['userEmail']);
     if ($stmt->execute()) {
         $results = $stmt->get_result();
         if ($results->num_rows > 0) {

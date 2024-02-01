@@ -1,11 +1,21 @@
 window.addEventListener("load", function () {
-    const user = sessionStorage.getItem("userEmail");
+
+    // Prendo la mail dell'account che voglio visualizzare
+    var href = window.location.search;
+    var email = href.substring(href.indexOf("=") + 1);
+    if (email == "") {
+        email = this.sessionStorage.getItem("userEmail");
+        window.location.href = "../../view/html/profile.html?email=" + email;
+    }
 
     // Dati dell'utente
     $.ajax({
         url: '../../model/user/getUserInfo.php',
-        type: 'POST',
+        type: 'GET',
         dataType: 'json',
+        data: {
+            userEmail: email
+        },
         success: function (response) {
             if (response.success) {
                 let userData = response.userData[0];
@@ -38,10 +48,10 @@ window.addEventListener("load", function () {
         $.ajax({
             url: '../../model/user/getSeguiti.php',
             type: 'GET',
-            data: {
-                seguiti: user,
-            },
             dataType: 'json',
+            data: {
+                userEmail: email
+            },
             success: function (response) {
                 if (response.success) {
                     const jsonData = response.utenti;
@@ -78,10 +88,10 @@ window.addEventListener("load", function () {
         $.ajax({
             url: '../../model/user/getFollowers.php',
             type: 'GET',
-            data: {
-                followers: user,
-            },
             dataType: 'json',
+            data: {
+                userEmail: email
+            },
             success: function (response) {
                 if (response.success) {
                     const jsonData = response.followers;
@@ -119,6 +129,9 @@ window.addEventListener("load", function () {
         url: '../../model/user/userPosts.php',
         type: 'POST',
         dataType: 'json',
+        data: {
+            userEmail: email
+        },
         success: function (response) {
             if (response.success) {
                 const jsonData = response.posts;

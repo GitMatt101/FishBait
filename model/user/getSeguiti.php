@@ -9,7 +9,7 @@ $query = "SELECT Username, FotoProfilo
 
 session_start();
 if ($stmt = $conn->prepare($query)) {
-    $stmt->bind_param("s", $_SESSION['userEmail']);
+    $stmt->bind_param("s", $_GET['userEmail']);
     if ($stmt->execute()) {
         $response = $stmt->get_result();
         if ($response->num_rows >= 1) {

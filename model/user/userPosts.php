@@ -7,7 +7,7 @@ $query = "SELECT ID, Foto FROM post WHERE EmailUtente = ? ORDER BY DataPubblicaz
 
 session_start();
 if ($stmt = $conn->prepare($query)) {
-    $stmt->bind_param("s", $_SESSION['userEmail']);
+    $stmt->bind_param("s", $_GET['userEmail']);
     if ($stmt->execute()) {
         $results = $stmt->get_result();
         if ($results->num_rows > 0) {
