@@ -17,7 +17,7 @@ window.addEventListener("load", function () {
                     home.appendChild(container);
 
                     let separator = document.createElement("hr");
-                    separator.className = "row my-5";
+                    separator.className = "row";
                     home.appendChild(separator);
                   }
             } else {
@@ -176,7 +176,7 @@ function createPost(id, email, image, username, caption) {
     commentButton.className = "bi fs-4 bi-chat border-0 bg-transparent";
     commentButton.setAttribute("type", "button");
     commentButton.addEventListener("click", function () {
-        window.location.href = "../../view/html/singlePost.html?id=" + id;
+        window.location.href = "../../view/html/post.html?id=" + id;
     });
 
     let buttonsContainer = document.createElement("div");

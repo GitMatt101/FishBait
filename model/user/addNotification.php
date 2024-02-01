@@ -4,7 +4,7 @@ include '../login/loginUtilities.php';
 require_once('../connection/dbConnection.php');
 
 $query = "INSERT INTO notifiche(EmailRicevente, EmailRiferimento, IDPost, DataRicevimento, Descrizione) 
-            VALUES (?, ?, ?, CURRENT_DATE(), ?)";
+            VALUES (?, ?, ?, NOW(), ?)";
 
 session_start();
 if (checkSession($conn)) {

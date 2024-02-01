@@ -176,7 +176,7 @@ window.addEventListener("load", function () {
                     );
                     element.appendChild(image);
                     element.onclick = function() {
-                        click(jsonData[i].ID);
+                        window.location.href = "../../view/html/post.html?id=" + jsonData[i].ID;
                     }
                     postSpace.appendChild(element);
                   }
@@ -189,10 +189,6 @@ window.addEventListener("load", function () {
         }
     });
 });
-
-function click(id) {
-    // window.location.href = "../../view/html/post.html?id=" + id;
-}
 
 function createFollowButton(email) {
     let followButton = document.createElement("button");

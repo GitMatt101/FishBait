@@ -29,17 +29,17 @@ window.addEventListener('load', function () {
                     let row = document.createElement("div");
                     row.className = "d-flex justify-content-between align-items-center alignt-text-center";
                     let userContainer = document.createElement("div");
-                    userContainer.className = "col-8 d-flex align-items-center";
+                    userContainer.className = "btn pe-auto col-8 d-flex align-items-center";
                     userContainer.appendChild(pfp);
                     userContainer.appendChild(username);
                     userContainer.appendChild(message);
-                    userContainer.addEventListener("click", function () {
+                    userContainer.onclick = function () {
                         if (jsonData[i].IDPost != null) {
                             window.location.href = "../../view/html/post.html?id=" + jsonData[i].IDPost;
                         } else {
                             window.location.href = "../../view/html/profile.html?email=" + jsonData[i].Email;
                         }
-                    });
+                    }
                     row.appendChild(userContainer);
                     row.appendChild(createFollowButton(jsonData[i].Email));
                     mainContainer.appendChild(row);

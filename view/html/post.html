@@ -23,13 +23,15 @@
         <div class="row justify-content-center">
             <div class="col-12 col-md-8 col-xl-6">
                 <div class="row">
-                    <div class="btn d-flex align-items-center">
-                        <img id="foto" src="../../resources/img/place-holder-pfp.jpg" class="rounded-circle me-3" alt="ff"
-                            width="60" height="60">
+                    <div class="btn col-10 d-flex align-items-center" id="profilo">
+                        <img id="foto" src="../../resources/img/place-holder-pfp.jpg" class="rounded-circle me-3" alt="ff" width="60" height="60">
                         <div class="row align-items-center text-start">
                             <b id="autore"></b>
                             <span id="luogo"></span>
                         </div>
+                    </div>
+                    <div class="col-2 row align-items-center" id="follow-button-space">
+
                     </div>
                 </div>
 
@@ -41,13 +43,14 @@
                         <span id="descrizione"></span>
                     </div>
                     <div class="col-3 d-flex justify-content-end" id="button-container">
+
                     </div>
                 </div>
                 
                 <hr class="row mt-1">
                 <form class="d-flex">
                     <input class="border-0 col-11" type="text" id="input-comment" name="input-comment" placeholder="Scrivi un commento...">
-                    <input class="btn btn-sm btn-primary col-1" type="submit" value="Invia" id="comment-btn">
+                    <button class="btn btn-sm btn-primary col-1" type="button" id="comment-btn">Invia</button>
                 </form>
                 <hr class="row mt-3">
                 <div id="comment-section">
