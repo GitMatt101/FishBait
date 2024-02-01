@@ -154,138 +154,29 @@ function createPost(id, email, image, username, caption) {
     let captionSpace = document.createElement("span");
     captionSpace.innerHTML = caption;
 
-    let likeButton = document.createElement("button");
-    $.ajax({
-        url: '../../model/post/checkLike.php',
-        type: 'GET',
-        dataType: 'json',
-        data: {
-            'postID': id
-        },
-        success: function (response) {
-            if (response.success) {
-                likeButton.className = "bi fs-4 bi-heart-fill border-0 bg-transparent";
-            } else {
-                likeButton.className = "bi fs-4 bi-heart border-0 bg-transparent";
-            }
-        },
-        error: function (error) {
-            console.error('Ajax error: ', error);
-            likeButton.className = "bi fs-4 bi-heart border-0 bg-transparent";
-        }
-    });
-    likeButton.setAttribute("type", "button");
-    likeButton.addEventListener("click", function () {
-        if (likeButton.className === "bi fs-4 bi-heart border-0 bg-transparent") {
-            $.ajax({
-                url: '../../model/post/addLike.php',
-                type: 'GET',
-                dataType: 'json',
-                data: {
-                    'postID': id
-                },
-                success: function (response) {
-                    if (response.success) {
-                        likeButton.className = "bi fs-4 bi-heart-fill border-0 bg-transparent";
-                        addNotification(email, id, "ha messo mi piace a un tuo post");
-                    } else {
-                        console.log("Errore: ", response.error);
-                    }
-                },
-                error: function (error) {
-                    console.error('Ajax error: ', error);
-                }
-            });
-        } else {
-            $.ajax({
-                url: '../../model/post/removeLike.php',
-                type: 'GET',
-                dataType: 'json',
-                data: {
-                    'postID': id
-                },
-                success: function (response) {
-                    if (response.success) {
-                        likeButton.className = "bi fs-4 bi-heart border-0 bg-transparent";
-                    } else {
-                        console.log("Errore: ", response.error);
-                    }
-                },
-                error: function (error) {
-                    console.error('Ajax error: ', error);
-                }
-            });
-        }
-    });
+    let likeButton = createButton("bi fs-4 bi-heart border-0 bg-transparent", 
+        "bi fs-4 bi-heart-fill border-0 bg-transparent", 
+        "../../model/post/checkLike.php", 
+        "../../model/post/addLike.php", 
+        "../../model/post/removeLike.php", 
+        id, 
+        email,
+        "ha messo mi piace al tuo post");
 
-    let bookmarkButton = document.createElement("button");
-    $.ajax({
-        url: '../../model/post/checkBookmark.php',
-        type: 'GET',
-        dataType: 'json',
-        data: {
-            'postID': id
-        },
-        success: function (response) {
-            if (response.success) {
-                bookmarkButton.className = "bi fs-4 bi-bookmark-fill border-0 bg-transparent";
-            } else {
-                bookmarkButton.className = "bi fs-4 bi-bookmark border-0 bg-transparent";
-            }
-        },
-        error: function (error) {
-            console.error('Ajax error: ', error);
-            bookmarkButton.className = "bi fs-4 bi-bookmark border-0 bg-transparent";
-        }
-    });
-    bookmarkButton.setAttribute("type", "button");
-    bookmarkButton.addEventListener("click", function () {
-        if (bookmarkButton.className === "bi fs-4 bi-bookmark border-0 bg-transparent") {
-            $.ajax({
-                url: '../../model/post/addBookmark.php',
-                type: 'GET',
-                dataType: 'json',
-                data: {
-                    'postID': id
-                },
-                success: function (response) {
-                    if (response.success) {
-                        bookmarkButton.className = "bi fs-4 bi-bookmark-fill border-0 bg-transparent";
-                    } else {
-                        console.log("Errore: ", response.error);
-                    }
-                },
-                error: function (error) {
-                    console.error('Ajax error: ', error);
-                }
-            });
-        } else {
-            $.ajax({
-                url: '../../model/post/removeBookmark.php',
-                type: 'GET',
-                dataType: 'json',
-                data: {
-                    'postID': id
-                },
-                success: function (response) {
-                    if (response.success) {
-                        bookmarkButton.className = "bi fs-4 bi-bookmark border-0 bg-transparent";
-                    } else {
-                        console.log("Errore: ", response.error);
-                    }
-                },
-                error: function (error) {
-                    console.error('Ajax error: ', error);
-                }
-            });
-        }
-    });
+    let bookmarkButton = createButton("bi fs-4 bi-bookmark border-0 bg-transparent",
+        "bi fs-4 bi-bookmark-fill border-0 bg-transparent",
+        "../../model/post/checkBookmark.php",
+        "../../model/post/addBookmark.php",
+        "../../model/post/removeBookmark.php",
+        id,
+        email,
+        null);
 
     let commentButton = document.createElement("button");
     commentButton.className = "bi fs-4 bi-chat border-0 bg-transparent";
     commentButton.setAttribute("type", "button");
     commentButton.addEventListener("click", function () {
-        window.location.href = "../../view/html/singlePost.html?id=" + id + "&email=" + email;
+        window.location.href = "../../view/html/singlePost.html?id=" + id;
     });
 
     let buttonsContainer = document.createElement("div");
@@ -304,18 +195,70 @@ function createPost(id, email, image, username, caption) {
     tmp.appendChild(captionContainer);
     tmp.appendChild(buttonsContainer);
 
-    let showComment = document.createElement("a");
-    showComment.className = "comment";
-    showComment.innerHTML = "Mostra tutti i commenti...";
-
     post.appendChild(img);
     post.appendChild(tmp);
-    post.appendChild(showComment);
 
     return post;
 }
 
-function addNotification (email, idPost, descrizione) {
+function createButton(empty, fill, checkPath, addPath, removePath, postID, email, message) {
+    let button = document.createElement("button");
+    button.setAttribute("type", "button");
+    // Verifica se il pulsante va attivato (like/bookmark già messo)
+    $.ajax({
+        url: checkPath,
+        type: 'GET',
+        dataType: 'json',
+        data: {
+            'postID': postID
+        },
+        success: function (response) {
+            if (response.success) {
+                button.className = fill;
+            } else {
+                button.className = empty;
+            }
+        },
+        error: function (error) {
+            console.error('Ajax error: ', error);
+            button.className = empty;
+        }
+    });
+    button.addEventListener("click", function () {
+        if (button.className == empty) {
+            executeAction(email, postID, message, fill, addPath, button);
+        } else {
+            executeAction(email, postID, null, empty, removePath, button);
+        }
+    });
+    return button;
+}
+
+function executeAction(email, id, message, className, path, button) {
+    $.ajax({
+        url: path,
+        type: 'GET',
+        dataType: 'json',
+        data: {
+            'postID': id
+        },
+        success: function (response) {
+            if (response.success) {
+                button.className = className;
+                if (message != null) {
+                    addNotification(email, id, message);
+                }
+            } else {
+                console.log("Errore: ", response.error);
+            }
+        },
+        error: function (error) {
+            console.error('Ajax error: ', error);
+        }
+    });
+}
+
+function addNotification(email, idPost, message) {
     $.ajax({
         url: '../../model/user/addNotification.php',
         type: 'POST',
@@ -323,7 +266,7 @@ function addNotification (email, idPost, descrizione) {
         data: {
             'emailRicevente': email,
             'idPost': idPost,
-            'descrizione': descrizione
+            'descrizione': message
         },
         success: function (response) {
             if (!response.success) {

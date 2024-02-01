@@ -3,7 +3,7 @@
 require_once("../connection/dbConnection.php");
 include("../login/loginUtilities.php");
 
-$query = "SELECT Username, FotoProfilo, Contenuto
+$query = "SELECT Username, FotoProfilo, Contenuto, Email
             FROM utenti U, commenti C
             WHERE U.Email = C.EmailUtente
             AND C.IDPost = ?";

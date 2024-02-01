@@ -1,8 +1,8 @@
 window.addEventListener("load", function () {
 
     // Prendo la mail dell'account che voglio visualizzare
-    var href = window.location.search;
-    var email = href.substring(href.indexOf("=") + 1);
+    let href = window.location.search;
+    let email = href.substring(href.indexOf("=") + 1);
     if (email == "") {
         email = this.sessionStorage.getItem("userEmail");
         window.location.href = "../../view/html/profile.html?email=" + email;

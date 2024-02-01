@@ -20,38 +20,45 @@
 
 <body>
     <div class="container mt-4">
-      <div class="row justify-content-center">
-        <div class="col-12 col-md-8 col-xl-6">
-            <div class="row mb-4">
-                <div class="d-flex align-items-center">
-                    <img id="foto" src="../../resources/img/postexample.png" class="rounded-circle me-3" alt="ff" width="40" height="40">
-                    <div>
-                        <b id="autore-post"></b>
-                        <p id="luogo-post"></p>
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-xl-6">
+                <div class="row">
+                    <div class="btn d-flex align-items-center">
+                        <img id="foto" src="../../resources/img/place-holder-pfp.jpg" class="rounded-circle me-3" alt="ff"
+                            width="60" height="60">
+                        <div class="row align-items-center text-start">
+                            <b id="autore"></b>
+                            <span id="luogo"></span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <img src="../../resources/img/postexample.png" class="rounded" alt="" width="100%">
+                <img id="post-img">
 
-            <div class="row mb-0">
-                <div class="col-12 md-10 d-flex justify-content-end">
-                    <a><i class="bi bi-suit-heart me-4 fs-4 text-dark theme-icon"></i></a>
-                    <a><i class="bi bi-bookmark fs-4 text-dark theme-icon"></i></a>
+                <div class="row">
+                    <div class="col-9 text-wrap">
+                        <b id="autore-descrizione"></b>
+                        <span id="descrizione"></span>
+                    </div>
+                    <div class="col-3 d-flex justify-content-end" id="button-container">
+                    </div>
                 </div>
-                <div>
-                    <p class="mb-0"><strong>Johnsen_Benjamin</strong> <span>What a MASSIVE fish</span></p>
+                
+                <hr class="row mt-1">
+                <form class="d-flex">
+                    <input class="border-0 col-11" type="text" id="input-comment" name="input-comment" placeholder="Scrivi un commento...">
+                    <input class="btn btn-sm btn-primary col-1" type="submit" value="Invia" id="comment-btn">
+                </form>
+                <hr class="row mt-3">
+                <div id="comment-section">
+
                 </div>
-            </div>
-            <hr class="row mt-4 mb-4">
-            <div id="prova">
 
             </div>
-
-          </div>
         </div>
-      </div>
+    </div>
     </div>
     <script src="../../controller/post/singlePost.js"></script>
 </body>
+
 </html>
