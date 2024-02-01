@@ -12,7 +12,7 @@ if ($stmt = $conn->prepare($query)) {
         if ($result->num_rows > 0) {
             $response = array("success" => true);
         } else {
-            $response = array("success" => false, "errpr" => "Mi piace non trovato");
+            $response = array("success" => false, "error" => "Mi piace non inserito");
         }
     } else {
         $response = array("success" => false, "error" => $stmt->error);
