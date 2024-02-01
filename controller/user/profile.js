@@ -71,7 +71,7 @@ window.addEventListener("load", function () {
                         );
                         pfp.setAttribute("width", 60);
                         pfp.setAttribute("height", 60);
-                        let username = document.createElement("p");
+                        let username = document.createElement("b");
                         let container = document.createElement("div");
                         container.className = "d-flex";
                         username.innerHTML = jsonData[i].Username;
@@ -85,7 +85,9 @@ window.addEventListener("load", function () {
                         userContainer.appendChild(username);
 
                         container.appendChild(userContainer);
-                        container.appendChild(createFollowButton(jsonData[i].Email));
+                        if (jsonData[i].Email != sessionStorage.getItem("userEmail")) {
+                            container.appendChild(createFollowButton(jsonData[i].Email));
+                        }
                         listBox.appendChild(container);
                     }
                 } else {
@@ -120,7 +122,7 @@ window.addEventListener("load", function () {
                         );
                         pfp.setAttribute("width", 60);
                         pfp.setAttribute("height", 60);
-                        let username = document.createElement("p");
+                        let username = document.createElement("b");
                         let container = document.createElement("div");
                         container.className = "d-flex";
                         username.innerHTML = jsonData[i].Username;
@@ -134,7 +136,9 @@ window.addEventListener("load", function () {
                         userContainer.appendChild(username);
 
                         container.appendChild(userContainer);
-                        container.appendChild(createFollowButton(jsonData[i].Email));
+                        if (jsonData[i].Email != sessionStorage.getItem("userEmail")) {
+                            container.appendChild(createFollowButton(jsonData[i].Email));
+                        }
                         listBox.appendChild(container);
                     }
                 } else {
@@ -150,7 +154,7 @@ window.addEventListener("load", function () {
     // Post dell'utente
     $.ajax({
         url: '../../model/user/userPosts.php',
-        type: 'POST',
+        type: 'GET',
         dataType: 'json',
         data: {
             userEmail: email
