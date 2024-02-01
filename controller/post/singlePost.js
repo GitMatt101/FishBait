@@ -1,14 +1,63 @@
 window.addEventListener("load", function () {
 
     let href = window.location.search;
-    let idpost = href.substring(href.indexOf("=") + 1);
+    let idPost = href.substring(href.indexOf("id=") + 3, href.indexOf("&"));
+    let email = href.substring(href.indexOf("email=") + 6);
+
+    $.ajax({
+        url: '../../model/user/getUserInfo.php',
+        type: 'GET',
+        dataType: 'json',
+        data: {
+            userEmail: email
+        },
+        success: function (response) {
+            if (response.success) {
+                let img = document.getElementById("foto");
+                img.className = "img-fluid rounded-circle me-3";
+                img.setAttribute("width", 60);
+                img.setAttribute("height", 60);
+                img.setAttribute(
+                    "src",
+                    "data:image/jpeg;base64," +  response.userData[0].FotoProfilo
+                );
+
+                let usr = document.getElementById("autore-post");
+                usr.innerHTML = response.userData[0].Username;
+            } else {
+                console.log(response.error);
+            }
+        },
+        error: function (error) {
+            console.error('Ajax error: ', error);
+        }
+    });
+
+    $.ajax({
+        url: '../../model/user/getUserInfo.php',
+        type: 'GET',
+        dataType: 'json',
+        data: {
+            userEmail: email
+        },
+        success: function (response) {
+            if (response.success) {
+                
+            } else {
+                console.log(response.error);
+            }
+        },
+        error: function (error) {
+            console.error('Ajax error: ', error);
+        }
+    });
 
     $.ajax({
         url: '../../model/post/getComment.php',
         type: 'GET',
         dataType: 'json',
         data: {
-            postID: idpost,
+            postID: idPost,
         },
         success: function (response) {
             if (response.success) {

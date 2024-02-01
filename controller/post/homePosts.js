@@ -285,7 +285,7 @@ function createPost(id, email, image, username, caption) {
     commentButton.className = "bi fs-4 bi-chat border-0 bg-transparent";
     commentButton.setAttribute("type", "button");
     commentButton.addEventListener("click", function () {
-        // TODO: commenti
+        window.location.href = "../../view/html/singlePost.html?id=" + id + "&email=" + email;
     });
 
     let buttonsContainer = document.createElement("div");
