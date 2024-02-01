@@ -6,7 +6,7 @@ include("../login/loginUtilities.php");
 function getCount($conn, $query) {
     $count = 0;
     if ($stmt = $conn->prepare($query)) {
-        $stmt->bind_param("s", $_SESSION['userEmail']); 
+        $stmt->bind_param("s", $_GET['userEmail']); 
         if ($stmt->execute()) {
             $stmt->bind_result($count);
             $stmt->fetch();
