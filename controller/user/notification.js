@@ -34,7 +34,11 @@ window.addEventListener('load', function () {
                     userContainer.appendChild(username);
                     userContainer.appendChild(message);
                     userContainer.addEventListener("click", function () {
-                        window.location.href = "../../view/html/post?id=" + jsonData[i].IDPost;
+                        if (jsonData[i].IDPost != null) {
+                            window.location.href = "../../view/html/post.html?id=" + jsonData[i].IDPost;
+                        } else {
+                            window.location.href = "../../view/html/profile.html?email=" + jsonData[i].Email;
+                        }
                     });
                     row.appendChild(userContainer);
                     row.appendChild(createFollowButton(jsonData[i].Email));
@@ -88,6 +92,7 @@ function createFollowButton(email) {
                     if (response.success) {
                         followButton.className = "btn btn-outline-primary";
                         followButton.innerHTML = "Segui già";
+                        addFollowNotification(email, null, "ha iniziato a seguirti");
                     } else {
                         console.log("Errore: ", response.error);
                     }
@@ -122,4 +127,26 @@ function createFollowButton(email) {
     tmp.className = "col-2 row align-items-center";
     tmp.appendChild(followButton);
     return tmp;
+}
+
+function addFollowNotification (email, idPost, descrizione) {
+    $.ajax({
+        url: '../../model/user/addNotification.php',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            'emailRicevente': email,
+            'idPost': idPost,
+            'descrizione': descrizione
+        },
+        success: function (response) {
+            if (!response.success) {
+                console.log("Errore: ", response.error);
+                console.log(response.idp);
+            }
+        },
+        error: function (error) {
+            console.error('Ajax error: ', error);
+        }
+    });
 }

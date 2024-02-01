@@ -231,6 +231,7 @@ function createFollowButton(email) {
                     if (response.success) {
                         followButton.className = "btn btn-outline-primary";
                         followButton.innerHTML = "Segui già";
+                        addFollowNotification(email, "null", "ha iniziato a seguirti");
                     } else {
                         console.log("Errore: ", response.error);
                     }
@@ -265,4 +266,25 @@ function createFollowButton(email) {
     tmp.className = "col-3 row align-items-center";
     tmp.appendChild(followButton);
     return tmp;
+}
+
+function addFollowNotification (email, idPost, descrizione) {
+    $.ajax({
+        url: '../../model/user/addNotification.php',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            'emailRicevente': email,
+            'idPost': idPost,
+            'descrizione': descrizione
+        },
+        success: function (response) {
+            if (!response.success) {
+                console.log("Errore: ", response.error);
+            }
+        },
+        error: function (error) {
+            console.error('Ajax error: ', error);
+        }
+    });
 }

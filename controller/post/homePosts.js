@@ -10,7 +10,7 @@ window.addEventListener("load", function () {
                 let home = document.getElementById("home");
                 for (let i = 0; i < jsonData.length; i++) {
                     let profile = createProfile(jsonData[i].Email, jsonData[i].Username, jsonData[i].Luogo, jsonData[i].FotoProfilo);
-                    let post = createPost(jsonData[i].ID, jsonData[i].Foto, jsonData[i].Username, jsonData[i].Descrizione);
+                    let post = createPost(jsonData[i].ID, jsonData[i].Email, jsonData[i].Foto, jsonData[i].Username, jsonData[i].Descrizione);
                     let container = document.createElement("div");
                     container.appendChild(profile);
                     container.appendChild(post);
@@ -98,6 +98,7 @@ function createProfile(email, username, location, image) {
                     if (response.success) {
                         followButton.className = "btn btn-outline-primary";
                         followButton.innerHTML = "Segui già";
+                        addNotification(email, "null", "ha iniziato a seguirti");
                     } else {
                         console.log("Errore: ", response.error);
                     }
@@ -137,7 +138,7 @@ function createProfile(email, username, location, image) {
     return profile;
 }
 
-function createPost(id, image, username, caption) {
+function createPost(id, email, image, username, caption) {
     let post = document.createElement("div");
 
     let img = document.createElement("img");
@@ -186,6 +187,7 @@ function createPost(id, image, username, caption) {
                 success: function (response) {
                     if (response.success) {
                         likeButton.className = "bi fs-4 bi-heart-fill border-0 bg-transparent";
+                        addNotification(email, id, "ha messo mi piace a un tuo post");
                     } else {
                         console.log("Errore: ", response.error);
                     }
@@ -311,4 +313,25 @@ function createPost(id, image, username, caption) {
     post.appendChild(showComment);
 
     return post;
+}
+
+function addNotification (email, idPost, descrizione) {
+    $.ajax({
+        url: '../../model/user/addNotification.php',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            'emailRicevente': email,
+            'idPost': idPost,
+            'descrizione': descrizione
+        },
+        success: function (response) {
+            if (!response.success) {
+                console.log("Errore: ", response.error);
+            }
+        },
+        error: function (error) {
+            console.error('Ajax error: ', error);
+        }
+    });
 }
