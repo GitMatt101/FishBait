@@ -8,6 +8,11 @@ window.addEventListener("load", function () {
         window.location.href = "../../view/html/profile.html?email=" + email;
     }
 
+    // Controllo se il profilo visualizzzato è quello dell'utente loggato per attivare il pulsante di logout
+    if (email != this.sessionStorage.getItem("userEmail")) {
+        document.getElementById("logout").style.display = "none";
+    }
+
     // Dati dell'utente
     $.ajax({
         url: '../../model/user/getUserInfo.php',
@@ -68,12 +73,21 @@ window.addEventListener("load", function () {
                         pfp.setAttribute("height", 60);
                         let username = document.createElement("p");
                         let container = document.createElement("div");
-                        container.className = "d-flex mb-3 align-items-center align-items-center";
+                        container.className = "d-flex";
                         username.innerHTML = jsonData[i].Username;
-                        container.appendChild(pfp);
-                        container.appendChild(username);
+
+                        let userContainer = document.createElement("div");
+                        userContainer.className = "btn d-flex col-9 align-items-center me-3";
+                        userContainer.onclick = function() {
+                            window.location.href = "../../view/html/profile.html?email=" + jsonData[i].Email;
+                        }
+                        userContainer.appendChild(pfp);
+                        userContainer.appendChild(username);
+
+                        container.appendChild(userContainer);
+                        container.appendChild(createFollowButton(jsonData[i].Email));
                         listBox.appendChild(container);
-                      }
+                    }
                 } else {
                     console.log("Errore: ", response.error);
                 }
@@ -108,12 +122,21 @@ window.addEventListener("load", function () {
                         pfp.setAttribute("height", 60);
                         let username = document.createElement("p");
                         let container = document.createElement("div");
-                        container.className = "d-flex mb-3 align-items-center align-items-center";
+                        container.className = "d-flex";
                         username.innerHTML = jsonData[i].Username;
-                        container.appendChild(pfp);
-                        container.appendChild(username);
+
+                        let userContainer = document.createElement("div");
+                        userContainer.className = "btn d-flex col-9 align-items-center me-3";
+                        userContainer.onclick = function() {
+                            window.location.href = "../../view/html/profile.html?email=" + jsonData[i].Email;
+                        }
+                        userContainer.appendChild(pfp);
+                        userContainer.appendChild(username);
+
+                        container.appendChild(userContainer);
+                        container.appendChild(createFollowButton(jsonData[i].Email));
                         listBox.appendChild(container);
-                      }
+                    }
                 } else {
                     console.log("Errore: ", response.error);
                 }
@@ -165,4 +188,77 @@ window.addEventListener("load", function () {
 
 function click(id) {
     // window.location.href = "../../view/html/post.html?id=" + id;
+}
+
+function createFollowButton(email) {
+    let followButton = document.createElement("button");
+    followButton.setAttribute("type", "button");
+    $.ajax({
+        url: '../../model/user/checkFollow.php',
+        type: 'GET',
+        dataType: 'json',
+        data: {
+            'emailSeguito': email
+        },
+        success: function (response) {
+            if (response.success) {
+                followButton.className = "btn btn-outline-primary";
+                followButton.innerHTML = "Segui già";
+            } else {
+                followButton.className = "btn btn-primary";
+                followButton.innerHTML = "Segui";
+            }
+        },
+        error: function (error) {
+            console.error('Ajax error: ', error);
+            followButton.className = "btn btn-primary";
+        }
+    });
+    followButton.addEventListener("click", function () {
+        if (followButton.className === "btn btn-primary") {
+            $.ajax({
+                url: '../../model/user/addFollow.php',
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                    'emailSeguito': email
+                },
+                success: function (response) {
+                    if (response.success) {
+                        followButton.className = "btn btn-outline-primary";
+                        followButton.innerHTML = "Segui già";
+                    } else {
+                        console.log("Errore: ", response.error);
+                    }
+                },
+                error: function (error) {
+                    console.error('Ajax error: ', error);
+                }
+            });
+        } else {
+            $.ajax({
+                url: '../../model/user/removeFollow.php',
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                    'emailSeguito': email
+                },
+                success: function (response) {
+                    if (response.success) {
+                        followButton.className = "btn btn-primary";
+                        followButton.innerHTML = "Segui";
+                    } else {
+                        console.log("Errore: ", response.error);
+                    }
+                },
+                error: function (error) {
+                    console.error('Ajax error: ', error);
+                }
+            });
+        }
+    });
+    let tmp = document.createElement("div");
+    tmp.className = "col-3 row align-items-center";
+    tmp.appendChild(followButton);
+    return tmp;
 }

@@ -2,7 +2,7 @@
 
 require_once("../connection/dbConnection.php");
 
-$query = "SELECT Username, FotoProfilo
+$query = "SELECT Username, FotoProfilo, U.Email
             FROM utenti U, follow F
             WHERE F.EmailUtente = ?
             AND F.EmailUtenteSeguito = U.Email";
