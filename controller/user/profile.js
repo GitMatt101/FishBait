@@ -3,7 +3,7 @@ window.addEventListener("load", function () {
 
     // Dati dell'utente
     $.ajax({
-        url: '../../model/getUserInfo.php',
+        url: '../../model/user/getUserInfo.php',
         type: 'POST',
         dataType: 'json',
         success: function (response) {
@@ -36,7 +36,7 @@ window.addEventListener("load", function () {
 
     btnSeguiti.addEventListener("click", function () {
         $.ajax({
-            url: '../../model/getSeguiti.php',
+            url: '../../model/user/getSeguiti.php',
             type: 'GET',
             data: {
                 seguiti: user,
@@ -45,7 +45,6 @@ window.addEventListener("load", function () {
             success: function (response) {
                 if (response.success) {
                     const jsonData = response.utenti;
-                    console.log(jsonData.length);
                     const listBox = document.getElementById("listSeguiti");
                     listBox.innerHTML = "";
                     for (let i = 0; i < jsonData.length; i++) {
@@ -77,7 +76,7 @@ window.addEventListener("load", function () {
 
     btnFollowers.addEventListener("click", function () {
         $.ajax({
-            url: '../../model/getFollowers.php',
+            url: '../../model/user/getFollowers.php',
             type: 'GET',
             data: {
                 followers: user,
@@ -86,7 +85,6 @@ window.addEventListener("load", function () {
             success: function (response) {
                 if (response.success) {
                     const jsonData = response.followers;
-                    console.log(jsonData.length);
                     const listBox = document.getElementById("listFollowers");
                     listBox.innerHTML = "";
                     for (let i = 0; i < jsonData.length; i++) {

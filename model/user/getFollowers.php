@@ -1,6 +1,6 @@
 <?php
 
-require_once("../model/connection/dbConnection.php");
+require_once("../connection/dbConnection.php");
 
 $query = "SELECT Username, FotoProfilo
             FROM utenti U, follow F

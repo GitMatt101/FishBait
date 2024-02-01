@@ -1,7 +1,7 @@
 <?php
 
-require_once("../model/connection/dbConnection.php");
-include("../model/login/loginUtilities.php");
+require_once("../connection/dbConnection.php");
+include("../login/loginUtilities.php");
 
 function getCount($conn, $query) {
     $count = 0;
