@@ -207,8 +207,16 @@ function createPost(id, image, username, caption) {
         }
     });
 
+    let commentButton = document.createElement("button");
+    commentButton.className = "bi fs-4 bi-chat border-0 bg-transparent";
+    commentButton.setAttribute("type", "button");
+    commentButton.addEventListener("click", function () {
+        // TODO: commenti
+    });
+
     let buttonsContainer = document.createElement("div");
     buttonsContainer.className = "col-3 d-flex justify-content-end";
+    buttonsContainer.appendChild(commentButton);
     buttonsContainer.appendChild(likeButton);
     buttonsContainer.appendChild(bookmarkButton);
 
