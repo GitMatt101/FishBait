@@ -18,18 +18,18 @@ if (checkSession($conn)) {
                 for ($i = 0; $i < count($notifications); $i++) {
                     $notifications[$i]['FotoProfilo'] = base64_encode($notifications[$i]['FotoProfilo']);
                 }
-                $response = array("success" => true, "notifications" => $notifications);
+                $response = array("success" => true, "login" => true, "notifications" => $notifications);
             } else {
-                $response = array("success" => false, "error" => "Nessuna notifica trovata");
+                $response = array("success" => false, "login" => true, "error" => "Nessuna notifica trovata");
             }
         } else {
-            $response = array("success" => false, "error" => $stmt->error);
+            $response = array("success" => false, "login" => true, "error" => $stmt->error);
         }
     } else {
-        $response = array("success" => false, "error" => $conn->error);
+        $response = array("success" => false, "login" => true, "error" => $conn->error);
     }
 } else {
-    $response = array("success" => false, "error" => "Utente non loggato");
+    $response = array("success" => false, "login" => false, "error" => "Utente non loggato");
 }
 
 echo json_encode($response);

@@ -36,7 +36,7 @@ function checkSession($conn)
     }
 }
 
-function login($email, $password, $connection, $remember) {
+function login($email, $password, $connection) {
     $query = "SELECT Email, Pwd, Salt FROM utenti WHERE Email = ? LIMIT 1";
     if ($excQuery = $connection->prepare($query)) {
         $userEmail = null;
@@ -51,11 +51,7 @@ function login($email, $password, $connection, $remember) {
 
         if ($excQuery->num_rows == 1 && !checkBruteForce($userEmail, $connection)) {
             if ($pwd == $userPassword) {
-                if ($remember === 'true') {
-                    setcookie("userEmail", $email, time() + (86400 * 30), "/"); // Valido per 1 giorno
-                    $_SESSION['userEmail'] = $_COOKIE['userEmail'];
-                } else
-                    $_SESSION['userEmail'] = $userEmail;
+                $_SESSION['userEmail'] = $userEmail;
                 return true;
             } else {
                 $now = time();

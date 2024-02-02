@@ -16,11 +16,11 @@ if (checkSession($conn)) {
         if ($stmt->execute()) {
             $response = array("success" => true);
         } else {
-            $response = array("success" => false, "error" => $stmt->error);
+            $response = array("success" => false, "login" => true, "error" => $stmt->error);
         }
     }
 } else {
-    $response = array("success" => false, "error" => $conn->error);
+    $response = array("success" => false, "login" => true, "error" => $conn->error);
 }
 
 echo json_encode($response);

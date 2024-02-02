@@ -13,25 +13,25 @@ $query = "SELECT P.ID, P.DataPubblicazione, P.Foto, P.Luogo, P.Descrizione, U.Em
             ORDER BY P.DataPubblicazione DESC";
 
 session_start();
-if ($stmt = $conn->prepare($query)) {
-    $stmt->bind_param("ss", $_SESSION['userEmail'], $_SESSION['userEmail']);
-    if ($stmt->execute()) {
-        $response = $stmt->get_result();
-        if ($response->num_rows >= 1) {
+if (checkSession($conn)) {
+    if ($stmt = $conn->prepare($query)) {
+        $stmt->bind_param("ss", $_SESSION['userEmail'], $_SESSION['userEmail']);
+        if ($stmt->execute()) {
+            $response = $stmt->get_result();
             $posts = $response->fetch_all(MYSQLI_ASSOC);
             for ($i = 0; $i < count($posts); $i++) {
                 $posts[$i]['FotoProfilo'] = base64_encode($posts[$i]['FotoProfilo']);
                 $posts[$i]['Foto'] = base64_encode($posts[$i]['Foto']);
             }
-            $response = array("success" => true, "posts" => $posts);
+            $response = array("success" => true, "login" => true, "posts" => $posts);
         } else {
-            $response = array("success" => false, "error" => "Nessun post trovato");
+            $response = array("success" => false, "login" => true, "error" => $stmt->error);
         }
     } else {
-        $response = array("success" => false, "error" => $stmt->error);
+        $response = array("success" => false, "login" => true, "error" => $conn->error);
     }
 } else {
-    $response = array("success" => false, "error" => $conn->error);
+    $response = array("success" => false, "login" => false, "error" => "Utente non loggato");
 }
 
 echo json_encode($response);

@@ -11,7 +11,7 @@ if (isset($_POST['remember'])) {
 }
 
 if (isset($_POST['email'], $_POST['password'])) {
-    if (login($_POST['email'], $_POST['password'], $conn, $remember)) {
+    if (login($_POST['email'], $_POST['password'], $conn)) {
         // Utente autenticato con successo
         $query = "SELECT Username, Nome, Cognome, FotoProfilo, Descrizione FROM utenti WHERE Email = ? LIMIT 1";
 

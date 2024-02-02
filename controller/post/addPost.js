@@ -1,3 +1,26 @@
+window.addEventListener("load", function() {
+    // Controllo il login
+    $.ajax({
+        url: '../../model/user/getUserInfo.php',
+        type: 'GET',
+        dataType: 'json',
+        data: {
+            userEmail: sessionStorage.getItem("userEmail")
+        },
+        success: function (response) {
+            if (!response.success) {
+                console.log(response.error);
+            }
+            if (!response.login) {
+                window.location.href = "../../view/html/login.html";
+            }
+        },
+        error: function (error) {
+            console.error('Ajax error: ', error);
+        }
+    });
+});
+
 document.getElementById("conferma").onclick = function() {
     addPost();
 }
@@ -23,6 +46,9 @@ function addPost() {
             if (response.success) {
                 window.location.href = "../../view/html/home.html";
             } else {
+                if (!response.login) {
+                    window.location.href = "../../view/html/login.html";
+                }
                 console.log(response.error);
             }
         },

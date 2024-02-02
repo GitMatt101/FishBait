@@ -37,6 +37,9 @@ window.addEventListener("load", function () {
                 document.getElementById("followers").innerHTML = response.followersCount;
                 document.getElementById("post").innerHTML = response.postCount;
             } else {
+                if (!response.login) {
+                    window.location.href = "../../view/html/login.html";
+                }
                 console.log(response.error);
             }
         },
@@ -91,6 +94,9 @@ window.addEventListener("load", function () {
                         listBox.appendChild(container);
                     }
                 } else {
+                    if (!response.login) {
+                        window.location.href = "../../view/html/login.html";
+                    }
                     console.log("Errore: ", response.error);
                 }
             },
@@ -142,6 +148,9 @@ window.addEventListener("load", function () {
                         listBox.appendChild(container);
                     }
                 } else {
+                    if (!response.login) {
+                        window.location.href = "../../view/html/login.html";
+                    }
                     console.log("Errore: ", response.error);
                 }
             },
@@ -181,6 +190,9 @@ window.addEventListener("load", function () {
                     postSpace.appendChild(element);
                   }
             } else {
+                if (!response.login) {
+                    window.location.href = "../../view/html/login.html";
+                }
                 console.log(response.error);
             }
         },

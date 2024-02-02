@@ -21,6 +21,9 @@ window.addEventListener("load", function () {
                     home.appendChild(separator);
                   }
             } else {
+                if (!response.login) {
+                    window.location.href = "../../view/html/login.html";
+                }
                 console.log("Errore: ", response.error);
             }
         },

@@ -46,6 +46,9 @@ window.addEventListener('load', function () {
                     notifications.appendChild(mainContainer);
                 }
             } else {
+                if (!response.login) {
+                    window.location.href = "../../view/html/login.html";
+                }
                 console.log(response.error);
             }
         },

@@ -8,15 +8,14 @@ function checkPasswords() {
     const pfp = document.getElementById('pfp').files[0];
     const data = document.getElementById('data').value;
     const descrizione = document.getElementById('descrizione').value;
-    const remember = document.getElementById('remember').checked;
 
     if (password1 === password2)
-        sendDataToPHP(email, password1, username, nome, cognome, pfp, data, descrizione, remember);
+        sendDataToPHP(email, password1, username, nome, cognome, pfp, data, descrizione);
     else
         alert("Le password non corrispondono. Riprova.");
 }
 
-function sendDataToPHP(email, password, username, nome, cognome, pfp, data, descrizione, remember) {
+function sendDataToPHP(email, password, username, nome, cognome, pfp, data, descrizione) {
     let formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
@@ -26,7 +25,6 @@ function sendDataToPHP(email, password, username, nome, cognome, pfp, data, desc
     formData.append('pfp', pfp);
     formData.append('data', data);
     formData.append('descrizione', descrizione);
-    formData.append('remember', remember);
 
     $.ajax({
         type: 'POST',
