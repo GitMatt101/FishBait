@@ -10,7 +10,7 @@ window.addEventListener("load", function () {
                 let home = document.getElementById("home");
                 for (let i = 0; i < jsonData.length; i++) {
                     let profile = createProfile(jsonData[i].Email, jsonData[i].Username, jsonData[i].Luogo, jsonData[i].FotoProfilo);
-                    let post = createPost(jsonData[i].ID, jsonData[i].Email, jsonData[i].Foto, jsonData[i].Username, jsonData[i].Descrizione);
+                    let post = createPost(jsonData[i].ID, jsonData[i].Email, jsonData[i].Foto, jsonData[i].Username, jsonData[i].Descrizione, jsonData[i].NumLikes, jsonData[i].NumCommenti);
                     let container = document.createElement("div");
                     container.appendChild(profile);
                     container.appendChild(post);
@@ -141,7 +141,7 @@ function createProfile(email, username, location, image) {
     return profile;
 }
 
-function createPost(id, email, image, username, caption) {
+function createPost(id, email, image, username, caption, likes, comments) {
     let post = document.createElement("div");
 
     let img = document.createElement("img");
@@ -151,23 +151,25 @@ function createPost(id, email, image, username, caption) {
         "data:image/jpeg;base64," + image
     );
 
-    let usernameSpace = document.createElement("strong");
-    usernameSpace.className = "ms-1";
-    usernameSpace.innerHTML = username + ": ";
-    let captionSpace = document.createElement("span");
-    captionSpace.innerHTML = caption;
-
-    let likeButton = createButton("bi fs-4 bi-heart border-0 bg-transparent", 
-        "bi fs-4 bi-heart-fill border-0 bg-transparent", 
+    let likeButton = createButton("bi me-0 p-0 fs-4 bi-heart border-0 bg-transparent", 
+        "bi me-0 p-0 fs-4 bi-heart-fill border-0 bg-transparent", 
         "../../model/post/checkLike.php", 
         "../../model/post/addLike.php", 
         "../../model/post/removeLike.php", 
         id, 
         email,
         "ha messo mi piace al tuo post");
+    let likeContainer = document.createElement("div");
+    likeContainer.className = "d-flex align-items-end me-1";
+    likeContainer.appendChild(likeButton);
+    let numLikes = document.createElement("span");
+    numLikes.innerHTML = likes;
+    numLikes.className = "fs-6";
+    likeContainer.appendChild(likeButton);
+    likeContainer.appendChild(numLikes);
 
-    let bookmarkButton = createButton("bi fs-4 bi-bookmark border-0 bg-transparent",
-        "bi fs-4 bi-bookmark-fill border-0 bg-transparent",
+    let bookmarkButton = createButton("bi me-0 p-0 fs-4 bi-bookmark border-0 bg-transparent",
+        "bi me-0 p-0 fs-4 bi-bookmark-fill border-0 bg-transparent",
         "../../model/post/checkBookmark.php",
         "../../model/post/addBookmark.php",
         "../../model/post/removeBookmark.php",
@@ -176,20 +178,34 @@ function createPost(id, email, image, username, caption) {
         null);
 
     let commentButton = document.createElement("button");
-    commentButton.className = "bi fs-4 bi-chat border-0 bg-transparent";
+    commentButton.className = "me-0 p-0 bi fs-4 bi-chat border-0 bg-transparent";
     commentButton.setAttribute("type", "button");
     commentButton.addEventListener("click", function () {
         window.location.href = "../../view/html/post.html?id=" + id;
     });
+    let commentContainer = document.createElement("div");
+    commentContainer.className = "d-flex align-items-end me-1";
+    commentContainer.appendChild(commentButton);
+    let numComments = document.createElement("span");
+    numComments.innerHTML = comments;
+    numComments.className = "fs-6";
+    commentContainer.appendChild(commentButton);
+    commentContainer.appendChild(numComments);
 
     let buttonsContainer = document.createElement("div");
     buttonsContainer.className = "col-3 d-flex justify-content-end";
-    buttonsContainer.appendChild(commentButton);
-    buttonsContainer.appendChild(likeButton);
+    buttonsContainer.appendChild(commentContainer);
+    buttonsContainer.appendChild(likeContainer);
     buttonsContainer.appendChild(bookmarkButton);
 
-    let captionContainer = document.createElement("p");
-    captionContainer.className = "col-9 text-wrap mt-2";
+    let captionContainer = document.createElement("div");
+    captionContainer.className = "col-9 d-flex align-items-center";
+    let usernameSpace = document.createElement("strong");
+    usernameSpace.className = "ms-1";
+    usernameSpace.innerHTML = username + ": ";
+    let captionSpace = document.createElement("span");
+    captionSpace.className = "text-wrap ms-1";
+    captionSpace.innerHTML = caption;
     captionContainer.appendChild(usernameSpace);
     captionContainer.appendChild(captionSpace);
 

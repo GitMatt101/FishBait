@@ -79,26 +79,6 @@ $.ajax({
                 }
             });
             document.getElementById("follow-button-space").appendChild(followButton);
-
-            $.ajax({
-                url: '../../model/post/getLikes.php',
-                type: 'GET',
-                dataType: 'json',
-                data: {
-                    'idPost': idPost
-                },
-                success: function (response) {
-                    if (response.success) {
-                        console.log(response.likes[0]);
-                    } else {
-                        console.log("Errore: ", response.error);
-                    }
-                },
-                error: function (error) {
-                    console.error('Ajax error: ', error);
-                }
-            });
-
         } else {
             console.log(response.error);
         }
@@ -178,7 +158,7 @@ window.addEventListener("load", function () {
 
                 document.getElementById("autore").innerHTML = jsonData.Username;
                 document.getElementById("luogo").innerHTML = jsonData.Luogo;
-                document.getElementById("autore-descrizione").innerHTML = jsonData.Username;
+                document.getElementById("autore-descrizione").innerHTML = jsonData.Username + ": ";
                 document.getElementById("descrizione").innerHTML = jsonData.Descrizione;
 
                 let img = document.getElementById("post-img");
@@ -188,8 +168,8 @@ window.addEventListener("load", function () {
                     "data:image/jpeg;base64," + jsonData.Foto
                 );
 
-                let likeButton = createButton("bi fs-4 bi-heart border-0 bg-transparent",
-                    "bi fs-4 bi-heart-fill border-0 bg-transparent",
+                let likeButton = createButton("bi me-0 p-0 fs-4 bi-heart border-0 bg-transparent",
+                    "bi me-0 p-0 fs-4 bi-heart-fill border-0 bg-transparent",
                     "../../model/post/checkLike.php",
                     "../../model/post/addLike.php",
                     "../../model/post/removeLike.php",
@@ -206,9 +186,18 @@ window.addEventListener("load", function () {
                     jsonData.Email,
                     null);
 
-                let buttonsContainer = document.getElementById("button-container");
-                buttonsContainer.appendChild(likeButton);
-                buttonsContainer.appendChild(bookmarkButton);
+                let likeContainer = document.createElement("div");
+                likeContainer.className = "d-flex align-items-end";
+                likeContainer.appendChild(likeButton);
+                let numLikes = document.createElement("span");
+                numLikes.innerHTML = jsonData.NumLikes;
+                numLikes.className = "fs-6";
+                likeContainer.appendChild(likeButton);
+                likeContainer.appendChild(numLikes);
+
+
+                document.getElementById("button-container").appendChild(likeContainer);
+                document.getElementById("button-container").appendChild(bookmarkButton);
             } else {
                 console.log(response.error);
             }

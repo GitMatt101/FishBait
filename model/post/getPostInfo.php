@@ -3,11 +3,10 @@
 include("../login/loginUtilities.php");
 require_once("../connection/dbConnection.php");
 
-$query = "SELECT P.Foto, P.Descrizione, P.Luogo, U.Username, U.Email, U.FotoProfilo
+$query = "SELECT P.Foto, P.Descrizione, P.Luogo, U.Username, U.Email, U.FotoProfilo, 
+            (SELECT COUNT(*) FROM likes L1 WHERE L1.IDPost = P.ID) AS NumLikes
             FROM post P, utenti U 
-            WHERE ID = ?
-            AND U.Email = P.EmailUtente
-            LIMIT 1";
+            WHERE P.ID = ? AND U.Email = P.EmailUtente LIMIT 1";
 
 session_start();
 if (checkSession($conn)) {
