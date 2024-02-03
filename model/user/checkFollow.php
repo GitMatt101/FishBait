@@ -7,7 +7,7 @@ $query = "SELECT * FROM follow WHERE EmailUtente = ? AND EmailUtenteSeguito = ? 
 session_start();
 if (checkSession($conn)) {
     if ($stmt = $conn->prepare($query)) {
-        $stmt->bind_param("si", $_SESSION['userEmail'], $_GET['emailSeguito']);
+        $stmt->bind_param("ss", $_SESSION['userEmail'], $_GET['emailSeguito']);
         if ($stmt->execute()) {
             $result = $stmt->get_result();
             if ($result->num_rows > 0) {
