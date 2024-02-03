@@ -30,7 +30,7 @@ if (isset($_POST['email'], $_POST['password'])) {
             $response = array("success" => false, "error" => $conn->error);
         }
     } else {
-        $response = array("success" => false, "error" => "Email o password errate.", "email" => $_POST['email'], "password" => $_POST['password']);
+        $response = array("success" => false, "error" => "Email o password errate.");
     }
 } else {
     $response = array("success" => false, "error" => "Parametri mancanti.");
