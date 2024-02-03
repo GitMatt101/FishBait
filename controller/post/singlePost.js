@@ -79,6 +79,26 @@ $.ajax({
                 }
             });
             document.getElementById("follow-button-space").appendChild(followButton);
+
+            $.ajax({
+                url: '../../model/post/getLikes.php',
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                    'idPost': idPost
+                },
+                success: function (response) {
+                    if (response.success) {
+                        console.log(response.likes[0]);
+                    } else {
+                        console.log("Errore: ", response.error);
+                    }
+                },
+                error: function (error) {
+                    console.error('Ajax error: ', error);
+                }
+            });
+
         } else {
             console.log(response.error);
         }
