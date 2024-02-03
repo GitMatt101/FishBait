@@ -40,10 +40,12 @@ function createProfile(email, username, location, image) {
 
     let pfp = document.createElement("img");
     pfp.className = "rounded-circle me-3";
-    pfp.setAttribute(
-        "src",
-        "data:image/jpeg;base64," + image
-    );
+    if (image) { 
+        pfp.setAttribute("src", "data:image/jpeg;base64," +  image);
+    } else {
+        pfp.setAttribute("src", "../../resources/img/place-holder-pfp.jpg");
+    }
+    pfp.setAttribute("alt", "");
     pfp.setAttribute("width", 50);
     pfp.setAttribute("height", 50);
 
