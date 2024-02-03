@@ -17,7 +17,7 @@ window.addEventListener("load", function () {
                     home.appendChild(container);
 
                     let separator = document.createElement("hr");
-                    separator.className = "row";
+                    separator.className = "row mt-2";
                     home.appendChild(separator);
                   }
             } else {
@@ -189,7 +189,7 @@ function createPost(id, email, image, username, caption) {
     buttonsContainer.appendChild(bookmarkButton);
 
     let captionContainer = document.createElement("p");
-    captionContainer.className = "col-9 text-wrap";
+    captionContainer.className = "col-9 text-wrap mt-2";
     captionContainer.appendChild(usernameSpace);
     captionContainer.appendChild(captionSpace);
 

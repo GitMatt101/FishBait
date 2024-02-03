@@ -182,7 +182,7 @@ window.addEventListener("load", function () {
                 document.getElementById("descrizione").innerHTML = jsonData.Descrizione;
 
                 let img = document.getElementById("post-img");
-                img.className = "img-fluid rounded";
+                img.className = "img-fluid rounded w-100";
                 img.setAttribute(
                     "src",
                     "data:image/jpeg;base64," + jsonData.Foto
@@ -238,8 +238,8 @@ window.addEventListener("load", function () {
                         "src",
                         "data:image/jpeg;base64," + jsonData[i].FotoProfilo
                     );
-                    pfp.setAttribute("width", 30);
-                    pfp.setAttribute("height", 30);
+                    pfp.setAttribute("width", 50);
+                    pfp.setAttribute("height", 50);
                     let username = document.createElement("b");
                     let container = document.createElement("div");
                     let contenuto = document.createElement("span");
