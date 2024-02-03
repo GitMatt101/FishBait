@@ -17,10 +17,6 @@ if ($stmt = $conn->prepare($query)) {
     if ($_FILES && $_FILES['pfp']['error'] == 0)
         $stmt->send_long_data(6, file_get_contents($_FILES['pfp']['tmp_name']));
 
-    $remember = false;
-    if (isset($_POST['remember']))
-        $remember = true;
-
     if ($stmt->execute()) {
         $response = array("success" => true, "email" => $_POST['email']);
         $_SESSION['userEmail'] = $_POST['email'];
