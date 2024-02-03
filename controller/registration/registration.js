@@ -36,7 +36,7 @@ function sendDataToPHP(email, password, username, nome, cognome, pfp, data, desc
         success: function(response) {
             if (response.success) {
                 sessionStorage.setItem("userEmail", response.email);
-                window.location.href = "../../view/html/home.html";
+                window.location.href = "../../view/html/profile.html?email=" + response.email;
             } else {
                 console.log(response.error);
             }
