@@ -96,6 +96,7 @@ function createFollowButton(email) {
                         followButton.className = "btn btn-outline-primary";
                         followButton.innerHTML = "Segui già";
                         addFollowNotification(email, null, "ha iniziato a seguirti");
+                        window.location.reload();
                     } else {
                         console.log("Errore: ", response.error);
                     }
@@ -116,6 +117,7 @@ function createFollowButton(email) {
                     if (response.success) {
                         followButton.className = "btn btn-primary";
                         followButton.innerHTML = "Segui";
+                        window.location.reload();
                     } else {
                         console.log("Errore: ", response.error);
                     }

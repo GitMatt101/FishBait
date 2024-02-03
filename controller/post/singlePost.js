@@ -108,7 +108,7 @@ document.getElementById("comment-btn").onclick = function () {
                         'idPost': idPost
                     },
                     success: function (response) {
-                        if (response.success) {
+                        if (response.success && response.postData[0].Email != sessionStorage.getItem("userEmail")) {
                             addNotification(response.postData[0].Email, idPost, "ha commentato il tuo post");
                         } else {
                             console.log(response.error);
@@ -196,8 +196,10 @@ window.addEventListener("load", function () {
                 likeContainer.appendChild(numLikes);
 
 
-                document.getElementById("button-container").appendChild(likeContainer);
-                document.getElementById("button-container").appendChild(bookmarkButton);
+                if (jsonData.Email != sessionStorage.getItem("userEmail")) {
+                    document.getElementById("button-container").appendChild(likeContainer);
+                    document.getElementById("button-container").appendChild(bookmarkButton);
+                }
             } else {
                 console.log(response.error);
             }
