@@ -11,6 +11,74 @@ window.addEventListener("load", function () {
     // Controllo se il profilo visualizzzato è quello dell'utente loggato per attivare il pulsante di logout
     if (email != this.sessionStorage.getItem("userEmail")) {
         document.getElementById("logout").style.display = "none";
+        let followButton = document.createElement("button");
+        followButton.setAttribute("type", "button");
+        $.ajax({
+            url: '../../model/user/checkFollow.php',
+            type: 'GET',
+            dataType: 'json',
+            data: {
+                'emailSeguito': email
+            },
+            success: function (response) {
+                if (response.success) {
+                    followButton.className = "btn btn-sm btn-outline-primary";
+                    followButton.innerHTML = "Segui già";
+                } else {
+                    followButton.className = "btn btn-sm btn-primary";
+                    followButton.innerHTML = "Segui";
+                }
+            },
+            error: function (error) {
+                console.error('Ajax error: ', error);
+                followButton.className = "btn btn-sm btn-primary";
+            }
+        });
+        followButton.addEventListener("click", function () {
+            if (followButton.className === "btn btn-sm btn-primary") {
+                $.ajax({
+                    url: '../../model/user/addFollow.php',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        'emailSeguito': email
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            followButton.className = "btn btn-sm btn-outline-primary";
+                            followButton.innerHTML = "Segui già";
+                            addNotification(email, "null", "ha iniziato a seguirti");
+                        } else {
+                            console.log("Errore: ", response.error);
+                        }
+                    },
+                    error: function (error) {
+                        console.error('Ajax error: ', error);
+                    }
+                });
+            } else {
+                $.ajax({
+                    url: '../../model/user/removeFollow.php',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        'emailSeguito': email
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            followButton.className = "btn btn-sm btn-primary";
+                            followButton.innerHTML = "Segui";
+                        } else {
+                            console.log("Errore: ", response.error);
+                        }
+                    },
+                    error: function (error) {
+                        console.error('Ajax error: ', error);
+                    }
+                });
+            }
+        });
+        document.getElementById("button-space").appendChild(followButton);
     }
 
     // Dati dell'utente

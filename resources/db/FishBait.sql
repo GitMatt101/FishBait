@@ -56,7 +56,6 @@ CREATE TABLE notifiche(
     IDPost INT,
     DataRicevimento DATETIME,
     Descrizione VARCHAR(50),
-    Visualizzato TINYINT(1) DEFAULT FALSE,
     FOREIGN KEY (EmailRicevente) REFERENCES utenti(Email),
     FOREIGN KEY (EmailRiferimento) REFERENCES utenti(Email),
     FOREIGN KEY (IDPost) REFERENCES post(ID)
