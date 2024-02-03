@@ -1,4 +1,4 @@
-function checkPasswords() {
+document.getElementById("conferma").onclick = function() {
     const email = document.getElementById('email').value;
     const password1 = document.getElementById('password').value;
     const password2 = document.getElementById('password2').value;
@@ -9,44 +9,47 @@ function checkPasswords() {
     const data = document.getElementById('data').value;
     const descrizione = document.getElementById('descrizione').value;
 
-    if (password1 === password2)
+    if (password1 === password2) {
         sendDataToPHP(email, password1, username, nome, cognome, pfp, data, descrizione);
-    else
-        alert("Le password non corrispondono. Riprova.");
+    } else {
+        alert("Le password non corrispondono.");
+    }
 }
 
 function sendDataToPHP(email, password, username, nome, cognome, pfp, data, descrizione) {
-    let formData = new FormData();
-    formData.append('email', email);
-    formData.append('password', password);
-    formData.append('username', username);
-    formData.append('nome', nome);
-    formData.append('cognome', cognome);
-    formData.append('pfp', pfp);
-    formData.append('data', data);
-    formData.append('descrizione', descrizione);
-
+    if (email === "") {
+        email = null;
+    }
+    if (password === "") {
+        password = null;
+    }
+    if (username === "") {
+        username = null;
+    }
     $.ajax({
         type: 'POST',
         url: '../../model/registration/registration.php', 
-        data: formData,
-        contentType: false,
-        processData: false,
-        dataType: "json",
+        data: {
+            email: email,
+            password: password,
+            username: username,
+            nome: nome,
+            cognome: cognome,
+            pfp: pfp,
+            data: data,
+            descrizione: descrizione
+        },
+        dataType: 'json',
         success: function(response) {
             if (response.success) {
-                sessionStorage.setItem("userEmail", response.email);
-                window.location.href = "../../view/html/profile.html?email=" + response.email;
+                sessionStorage.setItem("userEmail", email);
+                window.location.href = "../../view/html/profile.html?email=" + email;
             } else {
-                console.log(response.error);
+                alert(response.error);
             }
         },
         error: function(error) {
-            console.log(error);
+            console.log("Ajax error:", error);
         }
     });
-}
-
-document.getElementById("conferma").onclick = function() {
-    checkPasswords();
 }

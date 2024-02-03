@@ -1,19 +1,30 @@
-function login() {
-    let formData = new FormData();
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    formData.append('email', email);
-    formData.append('password', password);
+document.getElementById("confermaLogin").onclick = function() {
+    let email = document.getElementById('email').value;
+    let password = document.getElementById('password').value;
+    if (email === "") {
+        email = null;
+    }
+    if (password === "") {
+        password = null;
+    }
     $.ajax({
         type: 'POST',
         url: '../../model/login/login.php', 
-        data: formData,
-        contentType: false,
-        processData: false
+        data: {
+            email: email,
+            password: password
+        },
+        dataType: 'json',
+        success: function(response) {
+            if (response.success) {
+                sessionStorage.setItem("userEmail", email);
+                window.location.href = "../../view/html/profile.html?email=" + email;
+            } else {
+                alert(response.error);
+            }
+        },
+        error: function(error) {
+            console.log("Ajax error: ", error);
+        }
     });
-    sessionStorage.setItem("userEmail", email);
-}
-
-document.getElementById("confermaLogin").onclick = function() {
-    login();
 }

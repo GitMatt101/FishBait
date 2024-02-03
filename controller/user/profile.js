@@ -137,10 +137,12 @@ window.addEventListener("load", function () {
                     for (let i = 0; i < jsonData.length; i++) {
                         let pfp = document.createElement("img");
                         pfp.className = "rounded-circle me-3";
-                        pfp.setAttribute(
-                            "src",
-                            "data:image/jpeg;base64," +  jsonData[i].FotoProfilo
-                        );
+                        if (jsonData[i].FotoProfilo) { 
+                            pfp.setAttribute("src", "data:image/jpeg;base64," +  jsonData[i].FotoProfilo);
+                        } else {
+                            pfp.setAttribute("src", "../../resources/img/place-holder-pfp.jpg");
+                        }
+                        pfp.setAttribute("alt", "");
                         pfp.setAttribute("width", 60);
                         pfp.setAttribute("height", 60);
                         let username = document.createElement("b");
@@ -191,10 +193,12 @@ window.addEventListener("load", function () {
                     for (let i = 0; i < jsonData.length; i++) {
                         let pfp = document.createElement("img");
                         pfp.className = "rounded-circle me-3";
-                        pfp.setAttribute(
-                            "src",
-                            "data:image/jpeg;base64," +  jsonData[i].FotoProfilo
-                        );
+                        if (jsonData[i].FotoProfilo) { 
+                            pfp.setAttribute("src", "data:image/jpeg;base64," +  jsonData[i].FotoProfilo);
+                        } else {
+                            pfp.setAttribute("src", "../../resources/img/place-holder-pfp.jpg");
+                        }
+                        pfp.setAttribute("alt", "");
                         pfp.setAttribute("width", 60);
                         pfp.setAttribute("height", 60);
                         let username = document.createElement("b");
