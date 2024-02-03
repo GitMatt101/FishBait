@@ -26,7 +26,7 @@ if (checkSession($conn)) {
             if ($results->num_rows > 0) {
                 $userData = $results->fetch_all(MYSQLI_ASSOC);
                 $userData[0]['FotoProfilo'] = base64_encode($userData[0]['FotoProfilo']);
-                $response = array("success" => true, 
+                $response = array("success" => true, "login" => true,
                     "userData" => $userData,
                     "postCount" => getCount($conn, "SELECT COUNT(*) FROM post WHERE EmailUtente = ?"),
                     "followersCount" => getCount($conn, "SELECT COUNT(*) FROM follow WHERE EmailUtenteSeguito = ?"),

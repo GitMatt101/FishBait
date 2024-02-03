@@ -1,5 +1,6 @@
 <?php
 
+include("../login/loginUtilities.php");
 require_once("../connection/dbConnection.php");
 
 $query = "SELECT Username, FotoProfilo, U.Email
