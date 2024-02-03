@@ -304,6 +304,7 @@ function executeAction(email, id, message, className, path, button) {
         success: function (response) {
             if (response.success) {
                 button.className = className;
+                window.location.reload();
                 if (message != null) {
                     addNotification(email, id, message);
                 }
