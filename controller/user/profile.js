@@ -11,6 +11,7 @@ window.addEventListener("load", function () {
     // Controllo se il profilo visualizzzato è quello dell'utente loggato per attivare il pulsante di logout
     if (email != this.sessionStorage.getItem("userEmail")) {
         document.getElementById("logout").style.display = "none";
+        document.getElementById("edit").style.display = "none";
         let followButton = document.createElement("button");
         followButton.setAttribute("type", "button");
         $.ajax({
