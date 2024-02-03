@@ -177,8 +177,8 @@ window.addEventListener("load", function () {
                     jsonData.Email,
                     "ha messo mi piace al tuo post");
 
-                let bookmarkButton = createButton("bi fs-4 bi-bookmark border-0 bg-transparent",
-                    "bi fs-4 bi-bookmark-fill border-0 bg-transparent",
+                let bookmarkButton = createButton("bi me-0 p-0 fs-4 bi-bookmark border-0 bg-transparent",
+                    "bi me-0 p-0 fs-4 bi-bookmark-fill border-0 bg-transparent",
                     "../../model/post/checkBookmark.php",
                     "../../model/post/addBookmark.php",
                     "../../model/post/removeBookmark.php",
@@ -234,13 +234,13 @@ window.addEventListener("load", function () {
                     let username = document.createElement("b");
                     let container = document.createElement("div");
                     let contenuto = document.createElement("span");
-                    contenuto.className = "ms-2";
+                    contenuto.className = "ms-2 text-start";
                     container.className = "d-flex";
                     contenuto.innerHTML = jsonData[i].Contenuto;
                     username.innerHTML = jsonData[i].Username + ": ";
 
                     let userContainer = document.createElement("div");
-                    userContainer.className = "btn d-flex col-9 align-items-center me-3";
+                    userContainer.className = "btn d-flex col-12 align-items-center";
                     userContainer.onclick = function () {
                         window.location.href = "../../view/html/profile.html?email=" + jsonData[i].Email;
                     }
