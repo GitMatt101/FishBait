@@ -31,30 +31,30 @@
                     <div class="panel-body p-3">
                         <form class="login-validation" enctype="multipart/form-data" autocomplete="off">
                             <div class="input-group mb-3">
-                                <span class="input-group-text"><i class="far fa-envelope"></i></span>
-                                <input id="email" name="email" type="email" class="form-control" placeholder="E-Mail" required>
+                                <label for="email" class="input-group-text">Email</label>
+                                <input id="email" name="email" type="email" class="form-control" required>
                             </div>
                             <div class="input-group mb-3">
-                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                                <input id="password" name="password" type="password" class="form-control" placeholder="Password" required>
-                                <button class="btn btn-outline-secondary" type="button"><i class="far fa-eye-slash"></i></button>
+                                <label for="password" class="input-group-text">Password</label>
+                                <input id="password" name="password" type="password" class="form-control" required>
+                                <button class="btn btn-outline-secondary far fa-eye-slash" type="button"></button>
                             </div>
                             <div class="input-group mb-3">
-                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                                <input id="password2" name="password2" type="password" class="form-control" placeholder="Conferma Password" required>
-                                <button class="btn btn-outline-secondary" type="button"><i class="far fa-eye-slash"></i></button>
+                                <label for="password2" class="input-group-text">Conferma</label>
+                                <input id="password2" name="password2" type="password" class="form-control" required>
+                                <button class="btn btn-outline-secondary far fa-eye-slash" type="button"></button>
                             </div>
                             <div class="input-group mb-3">
-                                <span class="input-group-text"><i class="far fa-user"></i></span>
-                                <input id="username" name="username" type="text" class="form-control" placeholder="Username" required>
+                                <label for="username" class="input-group-text">Username</label>
+                                <input id="username" name="username" type="text" class="form-control" required>
                             </div>
                             <div class="input-group mb-3">
-                                <span class="input-group-text"><i class="far fa-user"></i></span>
-                                <input id="nome" name="nome" type="text" class="form-control" placeholder="Nome">
+                                <label for="nome" class="input-group-text">Nome</label>
+                                <input id="nome" name="nome" type="text" class="form-control">
                             </div>
                             <div class="input-group mb-3">
-                                <span class="input-group-text"><i class="far fa-user"></i></span>
-                                <input id="cognome" name="cognome" type="text" class="form-control" placeholder="Cognome">
+                                <label for="cognome" class="input-group-text">Cognome</label>
+                                <input id="cognome" name="cognome" type="text" class="form-control">
                             </div>
                             <div class="input-group mb-3">
                                 <label class="ms-1 mt-1 text-muted col-3" for="pfp">Foto Profilo</label>
@@ -65,7 +65,8 @@
                                 <input id="data" name="data" type="date" class="form-control">
                             </div>
                             <div class="input-group mb-3">
-                                <textarea  id="descrizione" name="descrizione" class="form-control" placeholder="Descrizione"></textarea>
+                                <label for="descrizione" class="input-group-text">Descrizione</label>
+                                <textarea  id="descrizione" name="descrizione" class="form-control"></textarea>
                             </div>
                             <div>
                                 <span id="error" class="text-danger"></span>
@@ -75,7 +76,7 @@
                                     <span>Hai già un account ?</span>
                                     <a href="login.html"><p>Accedi qui</p></a>
                                 </div>
-                                <button id="conferma" type="button" class="btn btn-primary">Conferma</button>
+                                <button id="conferma" type="button" class="btn btn-primary">Registrati</button>
                             </div>
                         </form>
                     </div>

@@ -26,7 +26,7 @@
                     <div class="btn col-9 d-flex align-items-center" id="profilo">
                         <img id="foto" src="../../resources/img/place-holder-pfp.jpg" class="rounded-circle me-3" alt="" width="60" height="60">
                         <div class="row align-items-center text-start">
-                            <b id="autore"></b>
+                            <strong id="autore"></strong>
                             <span id="luogo"></span>
                         </div>
                     </div>
@@ -48,8 +48,8 @@
                 
                 <hr class="row mt-1">
                 <form class="d-flex">
-                    <input class="border-0 col-10" type="text" id="input-comment" name="input-comment" placeholder="Scrivi un commento...">
-                    <button class="btn btn-sm btn-primary col-2 p-2" type="button" id="comment-btn">Invia</button>
+                    <input class="border-0 col-9" type="text" id="input-comment" name="input-comment" placeholder="Scrivi un commento...">
+                    <label for="input-comment" class="col-3"><button class="btn btn-sm btn-primary" type="button" id="comment-btn">Commenta</button></label>
                 </form>
                 <hr class="row mt-3">
 
@@ -65,22 +65,22 @@
                     <div class="d-flex justify-content-center">
                         <ul class="nav">
                             <li class="nav-item mx-3">
-                                <a href="savedPosts.html"><i class="bi bi-bookmark fs-4 text-dark theme-icon"></i></a>
+                                <a href="savedPosts.html" title="Post Salvati"><span class="bi bi-bookmark fs-4 text-dark theme-icon"></span></a>
                             </li>
                             <li class="nav-item mx-3">
-                                <a href="home.html"><i class="bi bi-house-door fs-4 text-dark theme-icon"></i></a>
+                                <a href="home.html" title="Home"><span class="bi bi-house-door fs-4 text-dark theme-icon"></span></a>
                             </li>
                             <li class="nav-item mx-3">
-                                <a href="addPost.html"><i class="bi bi-plus-square fs-4 text-dark theme-icon"></i></a>
+                                <a href="addPost.html" title="Crea Post"><span class="bi bi-plus-square fs-4 text-dark theme-icon"></span></a>
                             </li>
                             <li class="nav-item mx-3" id="notifications">
-                                <a href="notification.html"><i class="bi bi-bell fs-4 text-dark theme-icon"></i></a>
+                                <a href="notification.html" title="Notifiche"><span class="bi bi-bell fs-4 text-dark theme-icon"></span></a>
                             </li>
                             <li class="nav-item mx-3">
-                                <a href="profile.html"><i class="bi bi-person-circle fs-4 text-dark theme-icon"></i></a>
+                                <a href="profile.html" title="Profilo"><span class="bi bi-person-circle fs-4 text-dark theme-icon"></span></a>
                             </li>
                             <li class="nav-item mx-3">
-                                <a href="search.html"><i class="bi bi-search fs-4 text-dark theme-icon"></i></a>
+                                <a href="search.html" title="Cerca"><span class="bi bi-search fs-4 text-dark theme-icon"></span></a>
                             </li>
                         </ul>
                     </div>
