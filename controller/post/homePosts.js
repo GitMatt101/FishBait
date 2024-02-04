@@ -194,11 +194,15 @@ function createPost(id, email, image, username, caption, likes, comments) {
     commentContainer.appendChild(commentButton);
     commentContainer.appendChild(numComments);
 
+    let bookmarkContainer = document.createElement("div");
+    bookmarkContainer.className = "d-flex align-items-end me-1";
+    bookmarkContainer.appendChild(bookmarkButton);
+
     let buttonsContainer = document.createElement("div");
     buttonsContainer.className = "col-3 d-flex justify-content-end";
     buttonsContainer.appendChild(commentContainer);
     buttonsContainer.appendChild(likeContainer);
-    buttonsContainer.appendChild(bookmarkButton);
+    buttonsContainer.appendChild(bookmarkContainer);
 
     let captionContainer = document.createElement("div");
     captionContainer.className = "col-9 d-flex align-items-center";

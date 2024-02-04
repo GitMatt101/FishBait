@@ -21,19 +21,24 @@ window.addEventListener('load', function () {
                     pfp.setAttribute("height", 60);
                     let username = document.createElement("b");
                     username.innerHTML = jsonData[i].Username;
-                    let message = document.createElement("span");
-                    message.className = "ms-2";
+                    let message = document.createElement("p");
+                    message.className = "text-start";
                     message.innerHTML = jsonData[i].Descrizione;
 
                     let mainContainer = document.createElement("div");
                     mainContainer.className = "row mb-4";
                     let row = document.createElement("div");
-                    row.className = "d-flex justify-content-between align-items-center alignt-text-center";
+                    row.className = "d-flex justify-content-between align-items-center";
                     let userContainer = document.createElement("div");
                     userContainer.className = "btn pe-auto col-8 d-flex align-items-center";
                     let pfpContainer = document.createElement("div");
                     pfpContainer.className = "d-flex align-items-start";
                     pfpContainer.appendChild(pfp);
+                    
+                    let messageContainer = document.createElement("div");
+                    messageContainer.className = "text-start";
+                    messageContainer.appendChild(username);
+                    messageContainer.appendChild(message);
                     userContainer.onclick = function () {
                         if (jsonData[i].IDPost != null) {
                             window.location.href = "../../view/html/post.html?id=" + jsonData[i].IDPost;
@@ -42,6 +47,7 @@ window.addEventListener('load', function () {
                         }
                     }
                     row.appendChild(userContainer);
+                    userContainer.appendChild(messageContainer);
                     row.appendChild(createFollowButton(jsonData[i].Email));
                     if (!jsonData[i].Visualizzato) {
                         let dot = document.createElement("span");
