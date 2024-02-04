@@ -29,7 +29,7 @@ document.getElementById("search-btn").onclick = function () {
                     username.innerHTML = jsonData[i].Username;
 
                     let userContainer = document.createElement("div");
-                    userContainer.className = "btn d-flex col-9 align-items-center me-3";
+                    userContainer.className = "btn d-flex col-9 align-items-center ms-3";
                     userContainer.onclick = function () {
                         window.location.href = "../../view/html/profile.html?email=" + jsonData[i].Email;
                     }
