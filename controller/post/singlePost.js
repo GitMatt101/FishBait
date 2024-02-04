@@ -9,78 +9,80 @@ $.ajax({
         'idPost': idPost
     },
     success: function (response) {
-        if (response.success && response.postData[0].Email != sessionStorage.getItem("userEmail")) {
-            const email = response.postData[0].Email;
-            let followButton = document.createElement("button");
-            followButton.setAttribute("type", "button");
-            $.ajax({
-                url: '../../model/user/checkFollow.php',
-                type: 'GET',
-                dataType: 'json',
-                data: {
-                    'emailSeguito': email
-                },
-                success: function (response) {
-                    if (response.success) {
-                        followButton.className = "btn btn-sm btn-outline-primary p-1";
-                        followButton.innerHTML = "Segui già";
-                    } else {
+        if (response.postData[0].Email != sessionStorage.getItem("userEmail")) {
+            if (response.success) { 
+                const email = response.postData[0].Email;
+                let followButton = document.createElement("button");
+                followButton.setAttribute("type", "button");
+                $.ajax({
+                    url: '../../model/user/checkFollow.php',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        'emailSeguito': email
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            followButton.className = "btn btn-sm btn-outline-primary p-1";
+                            followButton.innerHTML = "Segui già";
+                        } else {
+                            followButton.className = "btn btn-sm btn-primary p-1";
+                            followButton.innerHTML = "Segui";
+                        }
+                    },
+                    error: function (error) {
+                        console.error('Ajax error: ', error);
                         followButton.className = "btn btn-sm btn-primary p-1";
-                        followButton.innerHTML = "Segui";
                     }
-                },
-                error: function (error) {
-                    console.error('Ajax error: ', error);
-                    followButton.className = "btn btn-sm btn-primary p-1";
-                }
-            });
-            followButton.addEventListener("click", function () {
-                if (followButton.className === "btn btn-sm btn-primary p-1") {
-                    $.ajax({
-                        url: '../../model/user/addFollow.php',
-                        type: 'GET',
-                        dataType: 'json',
-                        data: {
-                            'emailSeguito': email
-                        },
-                        success: function (response) {
-                            if (response.success) {
-                                followButton.className = "btn btn-sm btn-outline-primary p-1";
-                                followButton.innerHTML = "Segui già";
-                                addNotification(email, "null", "ha iniziato a seguirti");
-                            } else {
-                                console.log("Errore: ", response.error);
+                });
+                followButton.addEventListener("click", function () {
+                    if (followButton.className === "btn btn-sm btn-primary p-1") {
+                        $.ajax({
+                            url: '../../model/user/addFollow.php',
+                            type: 'GET',
+                            dataType: 'json',
+                            data: {
+                                'emailSeguito': email
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    followButton.className = "btn btn-sm btn-outline-primary p-1";
+                                    followButton.innerHTML = "Segui già";
+                                    addNotification(email, "null", "ha iniziato a seguirti");
+                                } else {
+                                    console.log("Errore: ", response.error);
+                                }
+                            },
+                            error: function (error) {
+                                console.error('Ajax error: ', error);
                             }
-                        },
-                        error: function (error) {
-                            console.error('Ajax error: ', error);
-                        }
-                    });
-                } else {
-                    $.ajax({
-                        url: '../../model/user/removeFollow.php',
-                        type: 'GET',
-                        dataType: 'json',
-                        data: {
-                            'emailSeguito': email
-                        },
-                        success: function (response) {
-                            if (response.success) {
-                                followButton.className = "btn btn-sm btn-primary p-1";
-                                followButton.innerHTML = "Segui";
-                            } else {
-                                console.log("Errore: ", response.error);
+                        });
+                    } else {
+                        $.ajax({
+                            url: '../../model/user/removeFollow.php',
+                            type: 'GET',
+                            dataType: 'json',
+                            data: {
+                                'emailSeguito': email
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    followButton.className = "btn btn-sm btn-primary p-1";
+                                    followButton.innerHTML = "Segui";
+                                } else {
+                                    console.log("Errore: ", response.error);
+                                }
+                            },
+                            error: function (error) {
+                                console.error('Ajax error: ', error);
                             }
-                        },
-                        error: function (error) {
-                            console.error('Ajax error: ', error);
-                        }
-                    });
-                }
-            });
-            document.getElementById("follow-button-space").appendChild(followButton);
-        } else {
-            console.log(response.error);
+                        });
+                    }
+                });
+                document.getElementById("follow-button-space").appendChild(followButton);
+            } else {
+                console.log(response.error);
+            }
         }
     },
     error: function (error) {
@@ -177,7 +179,15 @@ window.addEventListener("load", function () {
                     idPost,
                     jsonData.Email,
                     "ha messo mi piace al tuo post");
-
+                let likeContainer = document.createElement("div");
+                likeContainer.className = "d-flex align-items-end";
+                likeContainer.appendChild(likeButton);
+                let numLikes = document.createElement("span");
+                numLikes.innerHTML = jsonData.NumLikes;
+                numLikes.className = "fs-6";
+                likeContainer.appendChild(likeButton);
+                likeContainer.appendChild(numLikes);
+                
                 let bookmarkButton = createButton("bi me-0 p-0 fs-4 bi-bookmark border-0 bg-transparent",
                     "bi me-0 p-0 fs-4 bi-bookmark-fill border-0 bg-transparent",
                     "../../model/post/checkBookmark.php",
@@ -186,24 +196,16 @@ window.addEventListener("load", function () {
                     idPost,
                     jsonData.Email,
                     null);
-
-                let likeContainer = document.createElement("div");
-                likeContainer.className = "d-flex align-items-end";
-                likeContainer.appendChild(likeButton);
                 let bookmarkContainer = document.createElement("div");
                 bookmarkContainer.className = "d-flex align-items-end";
                 bookmarkContainer.appendChild(bookmarkButton);
-                let numLikes = document.createElement("span");
-                numLikes.innerHTML = jsonData.NumLikes;
-                numLikes.className = "fs-6";
-                likeContainer.appendChild(likeButton);
-                likeContainer.appendChild(numLikes);
-
 
                 if (jsonData.Email != sessionStorage.getItem("userEmail")) {
-                    document.getElementById("button-container").appendChild(likeContainer);
                     document.getElementById("button-container").appendChild(bookmarkContainer);
+                } else {
+                    likeButton.disabled = true;
                 }
+                document.getElementById("button-container").appendChild(likeContainer);
             } else {
                 console.log(response.error);
             }
