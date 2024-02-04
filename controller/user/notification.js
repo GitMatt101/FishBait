@@ -1,5 +1,4 @@
 window.addEventListener('load', function () {
-    
     $.ajax({
         url: '../../model/user/getNotifications.php',
         dataType: 'json',
@@ -11,8 +10,8 @@ window.addEventListener('load', function () {
                 notifications.innerHTML = "";
                 for (let i = 0; i < jsonData.length; i++) {
                     let pfp = document.createElement("img");
-                    pfp.className = "rounded-circle me-3";
-                    if (jsonData[i].FotoProfilo) { 
+                    pfp.className = "rounded-circle m-0 p-0 border border-2 border-dark";
+                    if (jsonData[i].FotoProfilo) {
                         pfp.setAttribute("src", "data:image/jpeg;base64," +  jsonData[i].FotoProfilo);
                     } else {
                         pfp.setAttribute("src", "../../resources/img/place-holder-pfp.jpg");
@@ -32,9 +31,9 @@ window.addEventListener('load', function () {
                     row.className = "d-flex justify-content-between align-items-center alignt-text-center";
                     let userContainer = document.createElement("div");
                     userContainer.className = "btn pe-auto col-8 d-flex align-items-center";
-                    userContainer.appendChild(pfp);
-                    userContainer.appendChild(username);
-                    userContainer.appendChild(message);
+                    let pfpContainer = document.createElement("div");
+                    pfpContainer.className = "d-flex align-items-start";
+                    pfpContainer.appendChild(pfp);
                     userContainer.onclick = function () {
                         if (jsonData[i].IDPost != null) {
                             window.location.href = "../../view/html/post.html?id=" + jsonData[i].IDPost;
@@ -44,6 +43,16 @@ window.addEventListener('load', function () {
                     }
                     row.appendChild(userContainer);
                     row.appendChild(createFollowButton(jsonData[i].Email));
+                    if (!jsonData[i].Visualizzato) {
+                        let dot = document.createElement("span");
+                        dot.className = "badge rounded-pill badge-dot bg-danger m-0 p-1";
+                        dot.innerHTML = " ";
+                        pfpContainer.appendChild(dot);
+                        setNotificationAsRead(jsonData[i].IDNotifica);
+                    }
+                    userContainer.appendChild(pfpContainer);
+                    userContainer.appendChild(username);
+                    userContainer.appendChild(message);
                     mainContainer.appendChild(row);
                     notifications.appendChild(mainContainer);
                 }
@@ -59,6 +68,25 @@ window.addEventListener('load', function () {
         }
     });
 });
+
+function setNotificationAsRead(idNotifica) {
+    $.ajax({
+        url: '../../model/user/setNotificationAsRead.php',
+        type: 'GET',
+        dataType: 'json',
+        data: {
+            'idNotifica': idNotifica
+        },
+        success: function (response) {
+            if (!response.success) {
+                console.log(response.error);
+            }
+        },
+        error: function (error) {
+            console.error('Ajax error: ', error);
+        }
+    });
+}
 
 function createFollowButton(email) {
     let followButton = document.createElement("button");

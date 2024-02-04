@@ -3,7 +3,7 @@
 include '../login/loginUtilities.php';
 require_once('../connection/dbConnection.php');
 
-$query = "SELECT N.IDPost, N.Descrizione, N.Visualizzato, U.Username, U.FotoProfilo, U.Email
+$query = "SELECT N.IDNotifica, N.IDPost, N.Descrizione, N.Visualizzato, U.Username, U.FotoProfilo, U.Email
             FROM notifiche N INNER JOIN utenti U ON N.EmailRiferimento = U.Email
             WHERE N.EmailRicevente = ? ORDER BY N.DataRicevimento DESC";
 
