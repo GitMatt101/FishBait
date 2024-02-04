@@ -8,7 +8,7 @@ window.addEventListener("load", function () {
         window.location.href = "../../view/html/profile.html?email=" + email;
     }
 
-    // Controllo se il profilo visualizzzato è quello dell'utente loggato per attivare il pulsante di logout
+    // Controllo se il profilo visualizzzato è quello dell'utente loggato per attivare il pulsante di logout o segui
     if (email != this.sessionStorage.getItem("userEmail")) {
         document.getElementById("logout").style.display = "none";
         document.getElementById("edit").style.display = "none";
@@ -23,20 +23,20 @@ window.addEventListener("load", function () {
             },
             success: function (response) {
                 if (response.success) {
-                    followButton.className = "btn btn-sm btn-outline-primary";
+                    followButton.className = "btn btn-sm btn-outline-primary p-1";
                     followButton.innerHTML = "Segui già";
                 } else {
-                    followButton.className = "btn btn-sm btn-primary";
+                    followButton.className = "btn btn-sm btn-primary p-1";
                     followButton.innerHTML = "Segui";
                 }
             },
             error: function (error) {
                 console.error('Ajax error: ', error);
-                followButton.className = "btn btn-sm btn-primary";
+                followButton.className = "btn btn-sm btn-primary p-1";
             }
         });
         followButton.addEventListener("click", function () {
-            if (followButton.className === "btn btn-sm btn-primary") {
+            if (followButton.className === "btn btn-sm btn-primary p-1") {
                 $.ajax({
                     url: '../../model/user/addFollow.php',
                     type: 'GET',
@@ -46,9 +46,27 @@ window.addEventListener("load", function () {
                     },
                     success: function (response) {
                         if (response.success) {
-                            followButton.className = "btn btn-sm btn-outline-primary";
+                            followButton.className = "btn btn-sm btn-outline-primary p-1";
                             followButton.innerHTML = "Segui già";
-                            addNotification(email, "null", "ha iniziato a seguirti");
+                            // Crea la notifica di follow
+                            $.ajax({
+                                url: '../../model/user/addNotification.php',
+                                type: 'POST',
+                                dataType: 'json',
+                                data: {
+                                    'emailRicevente': email,
+                                    'idPost': null,
+                                    'descrizione': "ha cominciato a seguirti"
+                                },
+                                success: function (response) {
+                                    if (!response.success) {
+                                        console.log("Errore: ", response.error);
+                                    }
+                                },
+                                error: function (error) {
+                                    console.error('Ajax error: ', error);
+                                }
+                            });
                         } else {
                             console.log("Errore: ", response.error);
                         }
@@ -67,7 +85,7 @@ window.addEventListener("load", function () {
                     },
                     success: function (response) {
                         if (response.success) {
-                            followButton.className = "btn btn-sm btn-primary";
+                            followButton.className = "btn btn-sm btn-primary p-1";
                             followButton.innerHTML = "Segui";
                         } else {
                             console.log("Errore: ", response.error);
@@ -78,6 +96,7 @@ window.addEventListener("load", function () {
                     }
                 });
             }
+            window.location.reload();
         });
         document.getElementById("button-space").appendChild(followButton);
     }

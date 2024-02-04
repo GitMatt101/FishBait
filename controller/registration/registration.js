@@ -17,28 +17,22 @@ document.getElementById("conferma").onclick = function() {
 }
 
 function sendDataToPHP(email, password, username, nome, cognome, pfp, data, descrizione) {
-    if (email === "") {
-        email = null;
-    }
-    if (password === "") {
-        password = null;
-    }
-    if (username === "") {
-        username = null;
-    }
+    let formData = new FormData();
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('username', username);
+    formData.append('nome', nome);
+    formData.append('cognome', cognome);
+    formData.append('pfp', pfp);
+    formData.append('data', data);
+    formData.append('descrizione', descrizione);
+
     $.ajax({
         type: 'POST',
         url: '../../model/registration/registration.php', 
-        data: {
-            email: email,
-            password: password,
-            username: username,
-            nome: nome,
-            cognome: cognome,
-            pfp: pfp,
-            data: data,
-            descrizione: descrizione
-        },
+        data: formData,
+        processData: false,
+        contentType: false,
         dataType: 'json',
         success: function(response) {
             if (response.success) {
