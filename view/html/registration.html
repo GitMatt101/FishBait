@@ -10,8 +10,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
@@ -39,12 +37,12 @@
                             <div class="input-group mb-3">
                                 <label for="password" class="input-group-text">Password</label>
                                 <input id="password" name="password" type="password" class="form-control" required>
-                                <button class="btn btn-outline-secondary far fa-eye-slash" type="button"></button>
+                                <button id="hide-password" class="btn btn-outline-secondary far fa-eye-slash" type="button"></button>
                             </div>
                             <div class="input-group mb-3">
                                 <label for="password2" class="input-group-text">Conferma</label>
                                 <input id="password2" name="password2" type="password" class="form-control" required>
-                                <button class="btn btn-outline-secondary far fa-eye-slash" type="button"></button>
+                                <button id="hide-password2" class="btn btn-outline-secondary far fa-eye-slash" type="button"></button>
                             </div>
                             <div class="input-group mb-3">
                                 <label for="username" class="input-group-text">Username</label>
@@ -90,9 +88,7 @@
         </div>
     </div>
     <script src="../../controller/registration/registration.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+    <script src="../../controller/registration/hidePassword.js"></script>
 </body>
 
 </html>
