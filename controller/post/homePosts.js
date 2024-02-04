@@ -50,7 +50,7 @@ function createProfile(email, username, location, image) {
     pfp.setAttribute("height", 50);
 
     let infoContainer = document.createElement("div");
-    let usernameSpace = document.createElement("b");
+    let usernameSpace = document.createElement("strong");
     let locationSpace = document.createElement("span");
     usernameSpace.innerHTML = username;
     locationSpace.className = "mb-0";
@@ -152,6 +152,7 @@ function createPost(id, email, image, username, caption, likes, comments) {
         "src",
         "data:image/jpeg;base64," + image
     );
+    img.setAttribute("alt", "");
 
     let likeButton = createButton("bi me-0 p-0 fs-4 bi-heart border-0 bg-transparent", 
         "bi me-0 p-0 fs-4 bi-heart-fill border-0 bg-transparent", 

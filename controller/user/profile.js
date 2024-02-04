@@ -164,7 +164,7 @@ window.addEventListener("load", function () {
                         pfp.setAttribute("alt", "");
                         pfp.setAttribute("width", 40);
                         pfp.setAttribute("height", 40);
-                        let username = document.createElement("b");
+                        let username = document.createElement("strong");
                         let container = document.createElement("div");
                         container.className = "d-flex";
                         username.innerHTML = jsonData[i].Username;
@@ -220,7 +220,7 @@ window.addEventListener("load", function () {
                         pfp.setAttribute("alt", "");
                         pfp.setAttribute("width", 60);
                         pfp.setAttribute("height", 60);
-                        let username = document.createElement("b");
+                        let username = document.createElement("strong");
                         let container = document.createElement("div");
                         container.className = "d-flex";
                         username.innerHTML = jsonData[i].Username;
@@ -275,6 +275,7 @@ window.addEventListener("load", function () {
                       "src",
                       "data:image/jpeg;base64," + jsonData[i].Foto
                     );
+                    image.setAttribute("alt", "");
                     element.appendChild(image);
                     element.onclick = function() {
                         window.location.href = "../../view/html/post.html?id=" + jsonData[i].ID;

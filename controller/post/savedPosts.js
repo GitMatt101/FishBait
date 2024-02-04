@@ -20,6 +20,7 @@ window.addEventListener('load', function() {
                       "src",
                       "data:image/jpeg;base64," + jsonData[i].Foto
                     );
+                    image.setAttribute("alt", "");
                     element.appendChild(image);
                     element.onclick = function() {
                         window.location.href = "../../view/html/post.html?id=" + jsonData[i].ID;

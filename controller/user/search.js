@@ -23,7 +23,7 @@ document.getElementById("search-btn").onclick = function () {
                     pfp.setAttribute("alt", "");
                     pfp.setAttribute("width", 60);
                     pfp.setAttribute("height", 60);
-                    let username = document.createElement("b");
+                    let username = document.createElement("strong");
                     let container = document.createElement("div");
                     container.className = "row";
                     username.innerHTML = jsonData[i].Username;
