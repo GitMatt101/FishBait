@@ -51,16 +51,16 @@ function createProfile(email, username, location, image) {
 
     let infoContainer = document.createElement("div");
     let usernameSpace = document.createElement("b");
-    let locationSpace = document.createElement("p");
+    let locationSpace = document.createElement("span");
     usernameSpace.innerHTML = username;
     locationSpace.className = "mb-0";
     locationSpace.innerHTML = location;
-    infoContainer.className = "text-start";
+    infoContainer.className = "row justify-content-center text-start";
     infoContainer.appendChild(usernameSpace);
     infoContainer.appendChild(locationSpace);
 
     let profileContainer = document.createElement("div");
-    profileContainer.className = "btn d-flex col-10";
+    profileContainer.className = "btn d-flex col-9";
     profileContainer.appendChild(pfp);
     profileContainer.appendChild(infoContainer);
     profileContainer.onclick = function() {
@@ -78,20 +78,20 @@ function createProfile(email, username, location, image) {
         },
         success: function (response) {
             if (response.success) {
-                followButton.className = "btn btn-outline-primary";
+                followButton.className = "btn btn-outline-primary p-1";
                 followButton.innerHTML = "Segui già";
             } else {
-                followButton.className = "btn btn-primary";
+                followButton.className = "btn btn-primary p-1";
                 followButton.innerHTML = "Segui";
             }
         },
         error: function (error) {
             console.error('Ajax error: ', error);
-            followButton.className = "btn btn-primary";
+            followButton.className = "btn btn-primary p-1";
         }
     });
     followButton.addEventListener("click", function () {
-        if (followButton.className === "btn btn-primary") {
+        if (followButton.className === "btn btn-primary p-1") {
             $.ajax({
                 url: '../../model/user/addFollow.php',
                 type: 'GET',
@@ -101,7 +101,7 @@ function createProfile(email, username, location, image) {
                 },
                 success: function (response) {
                     if (response.success) {
-                        followButton.className = "btn btn-outline-primary";
+                        followButton.className = "btn btn-outline-primary p-1";
                         followButton.innerHTML = "Segui già";
                         addNotification(email, "null", "ha iniziato a seguirti");
                     } else {
@@ -122,7 +122,7 @@ function createProfile(email, username, location, image) {
                 },
                 success: function (response) {
                     if (response.success) {
-                        followButton.className = "btn btn-primary";
+                        followButton.className = "btn btn-primary p-1";
                         followButton.innerHTML = "Segui";
                     } else {
                         console.log("Errore: ", response.error);
@@ -135,7 +135,7 @@ function createProfile(email, username, location, image) {
         }
     });
     let tmp = document.createElement("div");
-    tmp.className = "col-2 row align-items-center";
+    tmp.className = "col-3 row align-items-center p-0";
     tmp.appendChild(followButton);
 
     profile.appendChild(profileContainer);
@@ -206,13 +206,9 @@ function createPost(id, email, image, username, caption, likes, comments) {
 
     let captionContainer = document.createElement("div");
     captionContainer.className = "col-9 d-flex align-items-center";
-    let usernameSpace = document.createElement("strong");
-    usernameSpace.className = "ms-1";
-    usernameSpace.innerHTML = username + ": ";
     let captionSpace = document.createElement("span");
     captionSpace.className = "text-wrap ms-1";
     captionSpace.innerHTML = caption;
-    captionContainer.appendChild(usernameSpace);
     captionContainer.appendChild(captionSpace);
 
     let tmp = document.createElement("div");

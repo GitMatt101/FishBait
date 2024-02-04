@@ -21,7 +21,7 @@ window.addEventListener('load', function () {
                     pfp.setAttribute("height", 60);
                     let username = document.createElement("b");
                     username.innerHTML = jsonData[i].Username;
-                    let message = document.createElement("p");
+                    let message = document.createElement("span");
                     message.className = "text-start";
                     message.innerHTML = jsonData[i].Descrizione;
 
@@ -30,13 +30,13 @@ window.addEventListener('load', function () {
                     let row = document.createElement("div");
                     row.className = "d-flex justify-content-between align-items-center";
                     let userContainer = document.createElement("div");
-                    userContainer.className = "btn pe-auto col-8 d-flex align-items-center";
+                    userContainer.className = "btn d-flex col-9 align-items-center p-0 mb-2";
                     let pfpContainer = document.createElement("div");
-                    pfpContainer.className = "d-flex align-items-start";
+                    pfpContainer.className = "d-flex align-items-start me-2";
                     pfpContainer.appendChild(pfp);
                     
                     let messageContainer = document.createElement("div");
-                    messageContainer.className = "text-start";
+                    messageContainer.className = "row justify-content-center text-start";
                     messageContainer.appendChild(username);
                     messageContainer.appendChild(message);
                     userContainer.onclick = function () {
@@ -57,8 +57,7 @@ window.addEventListener('load', function () {
                         setNotificationAsRead(jsonData[i].IDNotifica);
                     }
                     userContainer.appendChild(pfpContainer);
-                    userContainer.appendChild(username);
-                    userContainer.appendChild(message);
+                    userContainer.appendChild(messageContainer);
                     mainContainer.appendChild(row);
                     notifications.appendChild(mainContainer);
                 }
@@ -106,20 +105,20 @@ function createFollowButton(email) {
         },
         success: function (response) {
             if (response.success) {
-                followButton.className = "btn btn-outline-primary";
+                followButton.className = "btn btn-outline-primary p-1";
                 followButton.innerHTML = "Segui già";
             } else {
-                followButton.className = "btn btn-primary";
+                followButton.className = "btn btn-primary p-1";
                 followButton.innerHTML = "Segui";
             }
         },
         error: function (error) {
             console.error('Ajax error: ', error);
-            followButton.className = "btn btn-primary";
+            followButton.className = "btn btn-primary p-1";
         }
     });
     followButton.addEventListener("click", function () {
-        if (followButton.className === "btn btn-primary") {
+        if (followButton.className === "btn btn-primary p-1") {
             $.ajax({
                 url: '../../model/user/addFollow.php',
                 type: 'GET',
@@ -129,7 +128,7 @@ function createFollowButton(email) {
                 },
                 success: function (response) {
                     if (response.success) {
-                        followButton.className = "btn btn-outline-primary";
+                        followButton.className = "btn btn-outline-primary p-1";
                         followButton.innerHTML = "Segui già";
                         addFollowNotification(email, null, "ha iniziato a seguirti");
                         window.location.reload();
@@ -151,7 +150,7 @@ function createFollowButton(email) {
                 },
                 success: function (response) {
                     if (response.success) {
-                        followButton.className = "btn btn-primary";
+                        followButton.className = "btn btn-primary p-1";
                         followButton.innerHTML = "Segui";
                         window.location.reload();
                     } else {
@@ -165,7 +164,7 @@ function createFollowButton(email) {
         }
     });
     let tmp = document.createElement("div");
-    tmp.className = "col-2 row align-items-center";
+    tmp.className = "col-3 row align-items-center";
     tmp.appendChild(followButton);
     return tmp;
 }

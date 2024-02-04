@@ -22,20 +22,20 @@ $.ajax({
                 },
                 success: function (response) {
                     if (response.success) {
-                        followButton.className = "btn btn-sm btn-outline-primary";
+                        followButton.className = "btn btn-sm btn-outline-primary p-1";
                         followButton.innerHTML = "Segui già";
                     } else {
-                        followButton.className = "btn btn-sm btn-primary";
+                        followButton.className = "btn btn-sm btn-primary p-1";
                         followButton.innerHTML = "Segui";
                     }
                 },
                 error: function (error) {
                     console.error('Ajax error: ', error);
-                    followButton.className = "btn btn-sm btn-primary";
+                    followButton.className = "btn btn-sm btn-primary p-1";
                 }
             });
             followButton.addEventListener("click", function () {
-                if (followButton.className === "btn btn-sm btn-primary") {
+                if (followButton.className === "btn btn-sm btn-primary p-1") {
                     $.ajax({
                         url: '../../model/user/addFollow.php',
                         type: 'GET',
@@ -45,7 +45,7 @@ $.ajax({
                         },
                         success: function (response) {
                             if (response.success) {
-                                followButton.className = "btn btn-sm btn-outline-primary";
+                                followButton.className = "btn btn-sm btn-outline-primary p-1";
                                 followButton.innerHTML = "Segui già";
                                 addNotification(email, "null", "ha iniziato a seguirti");
                             } else {
@@ -66,7 +66,7 @@ $.ajax({
                         },
                         success: function (response) {
                             if (response.success) {
-                                followButton.className = "btn btn-sm btn-primary";
+                                followButton.className = "btn btn-sm btn-primary p-1";
                                 followButton.innerHTML = "Segui";
                             } else {
                                 console.log("Errore: ", response.error);
@@ -160,7 +160,6 @@ window.addEventListener("load", function () {
 
                 document.getElementById("autore").innerHTML = jsonData.Username;
                 document.getElementById("luogo").innerHTML = jsonData.Luogo;
-                document.getElementById("autore-descrizione").innerHTML = jsonData.Username + ": ";
                 document.getElementById("descrizione").innerHTML = jsonData.Descrizione;
 
                 let img = document.getElementById("post-img");
@@ -191,6 +190,9 @@ window.addEventListener("load", function () {
                 let likeContainer = document.createElement("div");
                 likeContainer.className = "d-flex align-items-end";
                 likeContainer.appendChild(likeButton);
+                let bookmarkContainer = document.createElement("div");
+                bookmarkContainer.className = "d-flex align-items-end";
+                bookmarkContainer.appendChild(bookmarkButton);
                 let numLikes = document.createElement("span");
                 numLikes.innerHTML = jsonData.NumLikes;
                 numLikes.className = "fs-6";
@@ -200,7 +202,7 @@ window.addEventListener("load", function () {
 
                 if (jsonData.Email != sessionStorage.getItem("userEmail")) {
                     document.getElementById("button-container").appendChild(likeContainer);
-                    document.getElementById("button-container").appendChild(bookmarkButton);
+                    document.getElementById("button-container").appendChild(bookmarkContainer);
                 }
             } else {
                 console.log(response.error);
@@ -233,15 +235,20 @@ window.addEventListener("load", function () {
                         pfp.setAttribute("src", "../../resources/img/place-holder-pfp.jpg");
                     }
                     pfp.setAttribute("alt", "");
-                    pfp.setAttribute("width", 50);
-                    pfp.setAttribute("height", 50);
+                    pfp.setAttribute("width", 40);
+                    pfp.setAttribute("height", 40);
                     let username = document.createElement("b");
                     let container = document.createElement("div");
                     let contenuto = document.createElement("span");
-                    contenuto.className = "ms-2 text-start";
+                    contenuto.className = "text-start";
                     container.className = "d-flex";
                     contenuto.innerHTML = jsonData[i].Contenuto;
                     username.innerHTML = jsonData[i].Username + ": ";
+
+                    let contentContainer = document.createElement("div");
+                    contentContainer.className = "row justify-content-center text-start";
+                    contentContainer.appendChild(username);
+                    contentContainer.appendChild(contenuto);
 
                     let userContainer = document.createElement("div");
                     userContainer.className = "btn d-flex col-12 align-items-center";
@@ -249,8 +256,7 @@ window.addEventListener("load", function () {
                         window.location.href = "../../view/html/profile.html?email=" + jsonData[i].Email;
                     }
                     userContainer.appendChild(pfp);
-                    userContainer.appendChild(username);
-                    userContainer.appendChild(contenuto);
+                    userContainer.appendChild(contentContainer);
 
                     container.appendChild(userContainer);
                     listBox.appendChild(container);

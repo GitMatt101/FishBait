@@ -155,22 +155,22 @@ window.addEventListener("load", function () {
                     listBox.innerHTML = "";
                     for (let i = 0; i < jsonData.length; i++) {
                         let pfp = document.createElement("img");
-                        pfp.className = "rounded-circle me-3";
+                        pfp.className = "rounded-circle me-2";
                         if (jsonData[i].FotoProfilo) { 
                             pfp.setAttribute("src", "data:image/jpeg;base64," +  jsonData[i].FotoProfilo);
                         } else {
                             pfp.setAttribute("src", "../../resources/img/place-holder-pfp.jpg");
                         }
                         pfp.setAttribute("alt", "");
-                        pfp.setAttribute("width", 60);
-                        pfp.setAttribute("height", 60);
+                        pfp.setAttribute("width", 40);
+                        pfp.setAttribute("height", 40);
                         let username = document.createElement("b");
                         let container = document.createElement("div");
                         container.className = "d-flex";
                         username.innerHTML = jsonData[i].Username;
 
                         let userContainer = document.createElement("div");
-                        userContainer.className = "btn d-flex col-9 align-items-center me-3";
+                        userContainer.className = "btn col-9 d-flex align-items-center mb-2 p-0";
                         userContainer.onclick = function() {
                             window.location.href = "../../view/html/profile.html?email=" + jsonData[i].Email;
                         }
@@ -211,7 +211,7 @@ window.addEventListener("load", function () {
                     listBox.innerHTML = "";
                     for (let i = 0; i < jsonData.length; i++) {
                         let pfp = document.createElement("img");
-                        pfp.className = "rounded-circle me-3";
+                        pfp.className = "rounded-circle me-2";
                         if (jsonData[i].FotoProfilo) { 
                             pfp.setAttribute("src", "data:image/jpeg;base64," +  jsonData[i].FotoProfilo);
                         } else {
@@ -226,7 +226,7 @@ window.addEventListener("load", function () {
                         username.innerHTML = jsonData[i].Username;
 
                         let userContainer = document.createElement("div");
-                        userContainer.className = "btn d-flex col-9 align-items-center me-3";
+                        userContainer.className = "btn d-flex col-10 align-items-center p-0 mb-2";
                         userContainer.onclick = function() {
                             window.location.href = "../../view/html/profile.html?email=" + jsonData[i].Email;
                         }
@@ -306,20 +306,20 @@ function createFollowButton(email) {
         },
         success: function (response) {
             if (response.success) {
-                followButton.className = "btn btn-outline-primary";
+                followButton.className = "btn btn-outline-primary p-1";
                 followButton.innerHTML = "Segui già";
             } else {
-                followButton.className = "btn btn-primary";
+                followButton.className = "btn btn-primary p-1";
                 followButton.innerHTML = "Segui";
             }
         },
         error: function (error) {
             console.error('Ajax error: ', error);
-            followButton.className = "btn btn-primary";
+            followButton.className = "btn btn-primary p-1";
         }
     });
     followButton.addEventListener("click", function () {
-        if (followButton.className === "btn btn-primary") {
+        if (followButton.className === "btn btn-primary p-1") {
             $.ajax({
                 url: '../../model/user/addFollow.php',
                 type: 'GET',
@@ -329,7 +329,7 @@ function createFollowButton(email) {
                 },
                 success: function (response) {
                     if (response.success) {
-                        followButton.className = "btn btn-outline-primary";
+                        followButton.className = "btn btn-outline-primary p-1";
                         followButton.innerHTML = "Segui già";
                         addFollowNotification(email, "null", "ha iniziato a seguirti");
                     } else {
@@ -350,7 +350,7 @@ function createFollowButton(email) {
                 },
                 success: function (response) {
                     if (response.success) {
-                        followButton.className = "btn btn-primary";
+                        followButton.className = "btn btn-primary p-1";
                         followButton.innerHTML = "Segui";
                     } else {
                         console.log("Errore: ", response.error);
