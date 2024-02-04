@@ -12,7 +12,7 @@ document.getElementById("conferma").onclick = function() {
     if (password1 === password2) {
         sendDataToPHP(email, password1, username, nome, cognome, pfp, data, descrizione);
     } else {
-        alert("Le password non corrispondono.");
+        document.getElementById('error').innerHTML = "Le password non corrispondono";
     }
 }
 
@@ -45,7 +45,7 @@ function sendDataToPHP(email, password, username, nome, cognome, pfp, data, desc
                 sessionStorage.setItem("userEmail", email);
                 window.location.href = "../../view/html/profile.html?email=" + email;
             } else {
-                alert(response.error);
+                document.getElementById('error').innerHTML = response.error;
             }
         },
         error: function(error) {

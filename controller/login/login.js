@@ -20,7 +20,7 @@ document.getElementById("confermaLogin").onclick = function() {
                 sessionStorage.setItem("userEmail", email);
                 window.location.href = "../../view/html/profile.html?email=" + email;
             } else {
-                alert(response.error);
+                document.getElementById('error').innerHTML = response.error;
             }
         },
         error: function(error) {
