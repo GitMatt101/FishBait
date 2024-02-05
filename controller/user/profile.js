@@ -162,8 +162,8 @@ window.addEventListener("load", function () {
                             pfp.setAttribute("src", "../../resources/img/place-holder-pfp.jpg");
                         }
                         pfp.setAttribute("alt", "");
-                        pfp.setAttribute("width", 40);
-                        pfp.setAttribute("height", 40);
+                        pfp.setAttribute("width", 50);
+                        pfp.setAttribute("height", 50);
                         let username = document.createElement("strong");
                         let container = document.createElement("div");
                         container.className = "d-flex";
@@ -218,15 +218,15 @@ window.addEventListener("load", function () {
                             pfp.setAttribute("src", "../../resources/img/place-holder-pfp.jpg");
                         }
                         pfp.setAttribute("alt", "");
-                        pfp.setAttribute("width", 60);
-                        pfp.setAttribute("height", 60);
+                        pfp.setAttribute("width", 50);
+                        pfp.setAttribute("height", 50);
                         let username = document.createElement("strong");
                         let container = document.createElement("div");
                         container.className = "d-flex";
                         username.innerHTML = jsonData[i].Username;
 
                         let userContainer = document.createElement("div");
-                        userContainer.className = "btn d-flex col-10 align-items-center p-0 mb-2";
+                        userContainer.className = "btn d-flex col-9 align-items-center p-0 mb-2";
                         userContainer.onclick = function() {
                             window.location.href = "../../view/html/profile.html?email=" + jsonData[i].Email;
                         }
