@@ -25,7 +25,7 @@ document.getElementById("search-btn").onclick = function () {
                     pfp.setAttribute("height", 60);
                     let username = document.createElement("strong");
                     let container = document.createElement("div");
-                    container.className = "row";
+                    container.className = "row col-12";
                     username.innerHTML = jsonData[i].Username;
 
                     let userContainer = document.createElement("div");
